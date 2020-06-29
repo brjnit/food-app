@@ -60,6 +60,10 @@ const useStyles = makeStyles(theme => ({
 
 const PartnerOffering = (props) => {
     const classes = useStyles();
+
+    const onPRessAdd = () =>{
+        props.productSelectHandler(10)
+    }
     return (
 
         <Paper>

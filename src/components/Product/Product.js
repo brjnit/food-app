@@ -18,7 +18,7 @@ import ProductOfferings from '../ProductOfferings/ProductOfferings';
 
 // export default Product
 
-const Product = () =>  {
+const Product = (props) =>  {
     // const [error, setError] = useState(null);
     // const [isLoaded, setIsLoaded] = useState(false);
     // const [items, setItems] = useState([]);
@@ -32,7 +32,7 @@ const Product = () =>  {
   
  
       return (
-        <ProductOfferings/>
+        <ProductOfferings offeringsData = {props.productsData} productSelectHandler = {props.productSelectHandler}/>
       );
   }
 

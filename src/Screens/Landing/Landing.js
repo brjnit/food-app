@@ -13,6 +13,7 @@ import Header from '../../components/Header/Header';
 import HContainer from '../../components/UI/HContainer';
 import Product from '../../components/Product/Product';
 import colors from '../../Color'
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
     root: {
@@ -45,13 +46,26 @@ const useStyles = makeStyles({
 
 const Landing = (props) => {
     const classes = useStyles();
+    const partnerDetails = useSelector(state => state.details)
+    const productDetails = useSelector(state => state.productDetails)
+    const dispatch = useDispatch();
+    
+    useEffect(
+        ()=>dispatch(getPartnerDetails())
+    )
+
+    const onProductAdd = (data) =>{
+        //logic here
+        //dispatch()
+    }
+    
     return (
         <div className={classes.root}>
         <Wrapper>
-            <Header title = 'Food Store'></Header>
+            <Header title = {partnerDetails.name}></Header>
             <div>
                 <div className={classes.profile}> <HContainer ></HContainer></div>
-                <div className={classes.partnerOfferings}> <Product/></div>
+                <div className={classes.partnerOfferings}> <Product productsData = {productDetails} productSelectHandler = {onProductAdd}/></div>
                 {console.log(props)}
             </div>
             <CustomButton label= "Order" textColor= "white" background = "blue"/>
