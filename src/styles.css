@@ -9,8 +9,6 @@ body {
 }
 
 .container {
-  width: 345;
-  max-width: 345;
   justify-content: center;
 }
 

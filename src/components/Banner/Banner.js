@@ -6,6 +6,21 @@ import {formatDateTime} from '../../util'
 import { getLocalizedString } from '../../localization/i18n'
 import colors from '../../styles/colors'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        height: 65,
+        width: "100%"
+    },
+
+    title: {
+        flexGrow: 1,
+        flexDirection: "row",
+        justifyContent: "center"
+    },
+}));
 
 class Banner extends Component {
     constructor(props) {
@@ -15,7 +30,7 @@ class Banner extends Component {
             width : 300,
         };
     }
-
+    
     calculateHeight = (event) =>{
         const  { height, width} = event.nativeEvent.layout;
         this.setState({height : height * 0.8, width : width})

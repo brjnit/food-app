@@ -1,4 +1,5 @@
 import APIRequest from '../../network/APIRequest/APIRequest';
+import { PARTNER_OFFERINGS, PARTNER_DETAILS} from './actionTypes';
 
 
 export const getPartnerDetails = (partnerId) => {
@@ -8,21 +9,35 @@ export const getPartnerDetails = (partnerId) => {
             console.log("[StoreAction.js] getPartnerDetails status :: " + response)
             if (response.status == 200) {
                 response = response.data;
-                // dispatch(partnerOfferingsResult(response));
+                 dispatch(partnerDetailsResult(response));
             }
         });
     }
 }
 
-export const partnerOfferings = (partnerId) => {
+const partnerDetailsResult = (data) =>{
+    return {
+        type: PARTNER_DETAILS,
+        result : data
+    }
+}
+
+export const getPartnerOfferings = (partnerId) => {
     return (dispatch) => {
         let apiRequest = new APIRequest();
         apiRequest.callAPI("getPartnerOfferings", { "partnerId": partnerId }).then((response) => {
             console.log("[storeaction.js] response partnerOfferings", response)
             if (response.status == 200) {
                 response = response.data;
-                // dispatch(partnerOfferingsResult(response));
+                dispatch(partnerOfferingsResult(response));
             }
         });
+    }
+}
+
+const partnerOfferingsResult = (data) =>{
+    return {
+        type: PARTNER_OFFERINGS,
+        result : data
     }
 }
