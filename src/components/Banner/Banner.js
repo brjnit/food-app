@@ -1,12 +1,11 @@
-import React, {Component} from 'react'
-import {View, StyleSheet, Platform, Image, TouchableOpacity} from 'react-native'
+import React, {Component, useState} from 'react'
 import Text5 from '../UI/Text/Text5'
 import Text6 from '../UI/Text/Text6'
-import {formatDateTime} from '../../util'
-import { getLocalizedString } from '../../localization/i18n'
-import colors from '../../styles/colors'
-import Icon from 'react-native-vector-icons/Ionicons'
+//import {formatDateTime} from '../../util'
+//import { getLocalizedString } from '../../localization/i18n'
 import { makeStyles } from '@material-ui/core/styles';
+import Color from '../../Color'
+import { isMobile } from 'react-device-detect';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,81 +19,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "row",
         justifyContent: "center"
     },
-}));
 
-class Banner extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            height : 80,
-            width : 300,
-        };
-    }
-    
-    calculateHeight = (event) =>{
-        const  { height, width} = event.nativeEvent.layout;
-        this.setState({height : height * 0.8, width : width})
-    }
-
-    getBackgroudStyle = ()=>{
-        let style = {};
-        if(this.props.bannerImage == null ){
-            style = styles.backgroundImage;
-        }else{
-            style =  [styles.backgroundImage, {width : this.state.width*0.95 - this.state.height * 0.25}]
-        }
-        
-        return style;
-    }
-
-    getBannerTextContainerStyle = () =>{
-        let style = {};
-        if(this.props.bannerImage == null ){
-            style = [styles.bannerTextContainer, {width:"90%", alignItems : "center"}]
-        }else{
-            style =  styles.bannerTextContainer
-        }
-        return style;
-    }
-
-    bannerClickHandler = () =>{
-        //if(this.props.bannerImage != null ){
-            this.props.onBannerExpand()
-        //}
-    }
-    render(){
-        let imageUri = this.props.bannerImage;
-        //if(this.props.bannerImage == null || this.props.bannerImage == ""){
-            imageUri = this.props.bannerBackgroudImage//"https://captainamericadiag618.blob.core.windows.net/uploaded-files/message_1892245454e53432323.jpg";
-       // }
-        let image = null;
-        if(this.props.bannerImage != null){
-            image = (
-                <Image source = {{uri:this.props.bannerImage}} resizeMode = 'cover' style = {[styles.imageStyle, {height : this.state.height, width : this.state.height}]}/>
-                )
-        } 
-        console.log("[Banner.js] bannerImage :: ", this.props.bannerImage)
-        return (
-            <View  style = {[styles.container, this.props.style]}>
-                    <TouchableOpacity  style = {styles.bannerContainer} onLayout = {(e)=>this.calculateHeight(e)} onPress = { this.bannerClickHandler}>
-                        
-                        <Image source = {{uri:imageUri}} resizeMode = 'stretch' style = {this.getBackgroudStyle()}/>
-                        
-                        <View style = {this.getBannerTextContainerStyle()}>
-                            <Text5 style = {styles.bannerText} numberOfLines = {1}>{this.props.bannerHeading}</Text5>
-                            <Text6 numberOfLines ={2}>{this.props.bannerSubText}</Text6>
-                        </View>
-                        {image}
-                    </TouchableOpacity>
-                <View style = {styles.lastUpdatedView}>
-                    <Text6 style = {styles.updatedText}>{getLocalizedString("last_updated") + formatDateTime(this.props.updatedTime)}</Text6>
-                </View>
-            </View>
-        )
-    }   
-}
-
-const styles = StyleSheet.create({
     container : {
         width : '100%',
         justifyContent : 'center',
@@ -102,7 +27,7 @@ const styles = StyleSheet.create({
         height : 120
     },
     bannerText : {
-        fontWeight : Platform.OS=='ios'?'600' : '500',
+        fontWeight : isMobile ?'600' : '500',
         marginBottom : 5,
     }, 
     lastUpdatedView : {
@@ -114,7 +39,7 @@ const styles = StyleSheet.create({
     },
     updatedText : {
         fontStyle : 'italic',
-        color : colors.gray01,
+        color : Color.gray01,
     },
     bannerContainer : {
         flexDirection : 'row',
@@ -149,7 +74,87 @@ const styles = StyleSheet.create({
         top : 10,
         zIndex : 3
     }
+}));
 
-})
+/*
+Banner Props : 
+bannerImage
+bannerBackgroudImage
+width
+bannerText
+bannerHeading
+bannerSubText
+updatedTime
+*/
+
+const Banner = (props) => {
+    const [height, setHeight] = useState(80)
+    const [width, setWidth] = useState(props.width)
+    let imageUri = props.bannerImage;
+    const styles = useStyles()
+    const calculateHeight = (event) =>{
+        setHeight({height : height * 0.8})
+        setWidth({width : width})
+    }
+
+    const getBackgroudStyle = ()=>{
+        let style = {};
+       
+        if(props.bannerImage == null ){
+            style = [styles.backgroundImage];
+        }else{
+            style =  [styles.backgroundImage, {width : width*0.95 - height * 0.25}]
+        }
+        
+        return style;
+    }
+
+    const getBannerTextContainerStyle = () =>{
+        let style = {};
+        if(props.bannerImage == null ){
+            style = [styles.bannerTextContainer, {width:"90%", alignItems : "center"}]
+        }else{
+            style =  [styles.bannerTextContainer]
+        }
+        return style;
+    }
+
+    const bannerClickHandler = () =>{
+        //if(props.bannerImage != null ){
+            props.onBannerExpand()
+        //}
+    }
+ 
+        
+        //if(props.bannerImage == null || props.bannerImage == ""){
+            imageUri = props.bannerBackgroudImage//"https://captainamericadiag618.blob.core.windows.net/uploaded-files/message_1892245454e53432323.jpg";
+       // }
+        let image = null;
+        if(props.bannerImage != null){
+            image = (
+                <img src = {{uri:props.bannerImage}} resizeMode = 'cover'  style = {[styles.imageStyle, {height : height, width : height}]}/>
+                )
+        } 
+        console.log("[Banner.js] bannerImage :: ", props.bannerImage)
+        return (
+
+            <div  className = {[styles.container, props.style]}>
+                    <button  className = {styles.bannerContainer} onLayout = {(e)=>calculateHeight(e)} onPress = { bannerClickHandler}>
+                        
+                        <img src = {{uri:imageUri}} resizeMode = 'stretch' style = {getBackgroudStyle()}/>
+                        
+                        <div className = {getBannerTextContainerStyle()}>
+                            <Text5 style = {styles.bannerText} numberOfLines = {1}>{props.bannerHeading}</Text5>
+                            <Text6 numberOfLines ={2}>{props.bannerSubText}</Text6>
+                        </div>
+                        {image}
+                    </button>
+                <div className = {styles.lastUpdatedView}>
+                    <Text6 className = {styles.updatedText}> formatDateTime(props.updatedTime)}</Text6>
+                </div>
+            </div>
+        )
+      
+}
 
 export default Banner

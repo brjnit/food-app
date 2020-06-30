@@ -10,6 +10,11 @@ body {
 
 .container {
   justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background: lightblue;
+  width: 100%;
+  align-items: center;
 }
 
 .login-container {

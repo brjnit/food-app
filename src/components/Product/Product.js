@@ -32,7 +32,7 @@ const Product = (props) =>  {
   
  
       return (
-        <ProductOfferings offeringsData = {props.productsData} productSelectHandler = {props.productSelectHandler}/>
+        <ProductOfferings payload= {props.payload} productSelectHandler = {props.productSelectHandler}/>
       );
   }
 

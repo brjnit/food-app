@@ -7,17 +7,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: 345,
+        width: '100%',
         "& > * + *": {
             marginTop: theme.spacing(2)
-        }
+        },
+        display: "flex",
     },
 
     horizontal: {
+        width: '100%',
         display: "flex",
         flexDirection: "row",
         flexBasis: "a",
-        flexFlow: "",
 
         backgroundColor: "green"
     },
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 const HContainer = (props) => {
     const classes = useStyles();
     return (<div >
-        <div className="row">
+        <div className={classes.horizontal}>
           
                 <ImageAvatars small={false} src="https://captainamericadiag618.blob.core.windows.net/uploaded-files/partnerCoverPhoto_15439_1583485492.jpg" />
                 
@@ -53,7 +54,7 @@ const HContainer = (props) => {
             </div>
 
         </div>
-        <div className={classes.horizontalText}>
+        <div className={classes.root}>
             <Text6 className = {classes.horizontalText}> Product description</Text6>
         </div>
         </div>

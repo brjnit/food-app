@@ -5,7 +5,7 @@ import { PARTNER_OFFERINGS, PARTNER_DETAILS} from './actionTypes';
 export const getPartnerDetails = (partnerId) => {
     return (dispatch) => {
         let apiRequest = new APIRequest();
-        apiRequest.callAPI("getPartnerDetails", { "partnerId": partnerId }).then((response) => {
+        apiRequest.callAPI("getPartnerDetails", { "partnerId": "15439" }).then((response) => {
             console.log("[StoreAction.js] getPartnerDetails status :: " + response)
             if (response.status == 200) {
                 response = response.data;
@@ -22,10 +22,12 @@ const partnerDetailsResult = (data) =>{
     }
 }
 
+
+
 export const getPartnerOfferings = (partnerId) => {
     return (dispatch) => {
         let apiRequest = new APIRequest();
-        apiRequest.callAPI("getPartnerOfferings", { "partnerId": partnerId }).then((response) => {
+        apiRequest.callAPI("getPartnerOfferings", { "partnerId": "15439" }).then((response) => {
             console.log("[storeaction.js] response partnerOfferings", response)
             if (response.status == 200) {
                 response = response.data;

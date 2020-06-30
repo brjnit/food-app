@@ -5,16 +5,15 @@
  */
 
 import React from 'react'
-import colors from '../../../color'
-import { makeStyles } from '@material-ui/core'
+import { makeStyles, Typography } from '@material-ui/core'
 
- const styles = makeStyles({
+ const styles = makeStyles((theme) => ({
     textHeading: {
         fontSize : 17,
         color : theme.props.color,
         fontFamily : 'roboto'
     }
-  });
+  }));
 
 const Text5 =  props =>(
     <Typography style = {styles.textHeading}>{props.children}</Typography>

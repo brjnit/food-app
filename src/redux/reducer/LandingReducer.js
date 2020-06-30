@@ -1,17 +1,14 @@
 import { ADD, PARTNER_DETAILS, PARTNER_OFFERINGS, ORDER } from '../actions/actionTypes'
 
 const initialState = {
-    offerings: {
-
-    },
-    details: {
-
-    },
+    offerings: [],
+    details: [],
     orders: {
 
     }
 }
 const LandingReducer = (state = initialState, action) => {
+    console.log("action:  ", action)
     switch (action.type) {
         case ADD: {
             return {
@@ -33,7 +30,7 @@ const LandingReducer = (state = initialState, action) => {
         case PARTNER_DETAILS: {
             return {
                 ...state,
-                details: action.partnerDetails
+                details: action.result
 
             }
         }

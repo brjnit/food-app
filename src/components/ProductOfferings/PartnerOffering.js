@@ -14,37 +14,49 @@ import color from '../../Color'
 import Text4 from '../UI/Text/Text4';
 import Text6 from '../UI/Text/Text6';
 import CustomButton from '../UI/CustomButton';
+import { Text12gray01, Text17gray02, Text17gray00 } from '../UI/Text';
+import { Text22Black } from '../UI/Text/TextBlack';
+import { Text17Green } from '../UI/Text/TextGreen';
+import { ButtonBlue } from '../UI/Button';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: 345,
         "& > * + *": {
             marginTop: theme.spacing(2)
         }
     },
 
-    horizontal: {
-        display: "flex",
-        flexDirection: "row",
-        flexBasis: "a",
-        flexFlow: ""
+    column: {
+        display: 'flex',
+        flexDirection: 'column',
+        
+        
     },
 
-    horizontalText: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 5
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        
     },
-    vertical: {
-        display: "flex",
-        flexDirection: "column",
-        flexBasis: "auto",
-        flexWrap: "wrap",
-        flexShrink: "0",
+    partnerOfferings: {
+        //background: ' #FFF009 ',
+        border: 0,
+        borderRadius: 3,
+        width: 345,
+        alignContent: 'center'
     },
 
+    image: {
+        width: 150,
+        height: 150,
+        margin: '1% 4% 1% 1%' ,
+        borderRadius: 12,
+        elevation: 2
+    },
+
+   
     verticalText: {
-        marginLeft: 20,
+        marginLeft: 5,
         marginTop: 5
     },
     title: {
@@ -52,7 +64,40 @@ const useStyles = makeStyles(theme => ({
     },
     activeText: {
       
+    },
+
+    buttonAdd: {
+        justifyContent: 'right',
+        height: 48,
+        backgroundColor: 'blue',
+    },
+
+    fontgrey: {
+        fontSize: 16,
+        color: color.gray01
+    },
+
+    top: {
+        marginTop: 4
+    },
+
+    top10: {
+        marginTop: 10
+    },
+
+    margin5: {
+        marginLeft: 16
+    },
+
+    pricerow: {
+
     }
+
+
+
+
+
+
 
 
 
@@ -61,23 +106,23 @@ const useStyles = makeStyles(theme => ({
 const PartnerOffering = (props) => {
     const classes = useStyles();
 
-    const onPRessAdd = () =>{
+    const onPressAdd = () =>{
         props.productSelectHandler(10)
     }
     return (
 
         <Paper>
-            <div className="partner-row">
-                <CustomImage width='100' height='100' src={props.imageUrl}> </CustomImage>
-                <Paper elevation={0} className={classes.verticalText}>
-                    <Text1>{props.id}</Text1>
-                    <Text6>{props.offering}</Text6>
-                    <Text4>{props.partnerOfferingType}</Text4>
-                    <Text6>{props.longDescription}</Text6>
-                    <div className={classes.horizontal}>
-                        <div className={classes.horizontalText}>Rs 200 </div>
-                        <div className={classes.horizontalText}> <Text6 color= {color.textGreen}>ON REQUEST</Text6> </div>
-                        <CustomButton className={classes.horizontalText} variant="contained" background= {color.blue02} label= 'ADD' textColor = {color.white}/>
+            <div className={classes.row}>
+                <img className = {classes.image}  src={props.payload.imageUrl}/>
+               
+                <Paper elevation={0} className={classes.column}>
+                    <Text22Black>{props.payload.name}</Text22Black>
+                    <div className = {classes.top}> <Text12gray01> {props.payload.desc}</Text12gray01></div>
+                    <div className = {classes.top10}> <Text12gray01> {props.longDescription}</Text12gray01></div>
+                    <div className={classes.row}>
+                        <Text17gray00> {props.payload.price}</Text17gray00>
+                        <Text17Green className={classes.margin5}>ON REQUEST</Text17Green>
+                        <ButtonBlue className={classes.margin5} onClick= {onPressAdd}> Add</ButtonBlue>
                     </div>
                 </Paper>
             </div>

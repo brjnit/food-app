@@ -8,16 +8,16 @@ import React from 'react'
 import colors from '../../../Color'
 import { makeStyles, Typography } from '@material-ui/core'
 
- const styles = makeStyles({
+ const styles = makeStyles((theme) => ({
     textHeading: {
-        fontSize : 12,
-        color : colors.blackText,
+        fontSize : 8,
+        color : theme.props.color,
         fontFamily : 'roboto'
     }
-  });
+  }));
 
 const Text6 = props =>(
-    <Typography style = {styles.textHeading}>{props.children}</Typography>
+    <div className = {styles.textHeading}>{props.children}</div>
 )
 
 export default Text6
