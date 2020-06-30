@@ -13,7 +13,6 @@ import Header from '../../components/Header/Header';
 import HContainer from '../../components/UI/HContainer';
 import Product from '../../components/Product/Product';
 import colors from '../../Color'
-import { useSelector, useDispatch } from 'react-redux';
 import { isMobile } from 'react-device-detect';
 import ProductDetails from '../../components/ProductDetails';
 import Banner from '../../components/Banner/Banner';
