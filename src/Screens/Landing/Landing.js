@@ -79,32 +79,6 @@ const useStyles = makeStyles({
 
 const Landing = (props) => {
     const classes = useStyles();
-<<<<<<< HEAD
-    const partnerDetails = useSelector(state => state.details)
-    const productDetails = useSelector(state => state.productDetails)
-    const dispatch = useDispatch();
-    
-    useEffect(
-        ()=>dispatch(getPartnerDetails())
-    )
-
-    const onProductAdd = (data) =>{
-        //logic here
-        //dispatch()
-    }
-    
-    return (
-        <div className={classes.root}>
-        <Wrapper>
-            <Header title = {partnerDetails.name}></Header>
-            <div>
-                <div className={classes.profile}> <HContainer ></HContainer></div>
-                <div className={classes.partnerOfferings}> <Product productsData = {productDetails} productSelectHandler = {onProductAdd}/></div>
-                {console.log(props)}
-            </div>
-            <CustomButton label= "Order" textColor= "white" background = "blue"/>
-        </Wrapper>
-=======
     //const { offerings} = props.partnerOfferings;
     //const partnerdetails = useSelector(state => state.details)
     const dispatch = useDispatch();
@@ -166,7 +140,6 @@ const Landing = (props) => {
                 </div>
 
             </Wrapper>
->>>>>>> food app first add bussiness logic
         </div>
     )
 }
