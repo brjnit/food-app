@@ -3,41 +3,25 @@ Author: Brajesh Kumar
 */
 
 import React, { useState, useEffect } from 'react'
-import Response from '../../Common/Response';
-import Box from '@material-ui/core/Box'
-import Text1 from '../UI/Text/Text1';
-import ImageAvatars from '../UI/ImageAvatars';
-import { Button, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CustomImage from '../UI/CustomImage';
 import color from '../../Color'
-import Text4 from '../UI/Text/Text4';
-import Text6 from '../UI/Text/Text6';
-import CustomButton from '../UI/CustomButton';
-import { Text12gray01, Text17gray02, Text17gray00 } from '../UI/Text';
-import { Text22Black } from '../UI/Text/TextBlack';
+import { Text17gray06, Text17gray02, Text17gray01 } from '../UI/Text/Text';
+import { Text22Black, Text17Black } from '../UI/Text/TextBlack';
 import { Text17Green } from '../UI/Text/TextGreen';
-import { ButtonBlue } from '../UI/Button';
-
+import AddOrder from './../UI/AddOrder';
 const useStyles = makeStyles(theme => ({
-    root: {
-        "& > * + *": {
-            marginTop: theme.spacing(2)
-        }
-    },
-
     column: {
         display: 'flex',
         flexDirection: 'column',
-        
-        
+        justifyContent: 'space-between'
     },
 
     row: {
         display: 'flex',
         flexDirection: 'row',
-        
+        marginTop: 5
     },
+
     partnerOfferings: {
         //background: ' #FFF009 ',
         border: 0,
@@ -49,12 +33,12 @@ const useStyles = makeStyles(theme => ({
     image: {
         width: 150,
         height: 150,
-        margin: '1% 4% 1% 1%' ,
+        margin: '1% 0% 1% 1%',
         borderRadius: 12,
         elevation: 2
     },
 
-   
+
     verticalText: {
         marginLeft: 5,
         marginTop: 5
@@ -63,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
     },
     activeText: {
-      
+
     },
 
     buttonAdd: {
@@ -85,48 +69,45 @@ const useStyles = makeStyles(theme => ({
         marginTop: 10
     },
 
-    margin5: {
+    marginLeft: {
         marginLeft: 16
     },
 
     pricerow: {
-
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
     }
-
-
-
-
-
-
-
-
-
 }));
+
+/*{
+    imageUrl: item.imageUrl,
+    offering: item.offering,
+    offeringSubText: item.offeringSubText,
+    partnerOfferingType: item.partnerOfferingType,
+    longDescription: item.longDescription,
+    createdAt: item.createdAt,
+    cost: item.cost
+}*/
 
 const PartnerOffering = (props) => {
     const classes = useStyles();
-
-    const onPressAdd = () =>{
-        props.productSelectHandler(10)
-    }
     return (
-
-        <Paper>
-            <div className={classes.row}>
-                <img className = {classes.image}  src={props.payload.imageUrl}/>
-               
-                <Paper elevation={0} className={classes.column}>
-                    <Text22Black>{props.payload.name}</Text22Black>
-                    <div className = {classes.top}> <Text12gray01> {props.payload.desc}</Text12gray01></div>
-                    <div className = {classes.top10}> <Text12gray01> {props.longDescription}</Text12gray01></div>
-                    <div className={classes.row}>
-                        <Text17gray00> {props.payload.price}</Text17gray00>
+        <div className={classes.row}>
+            <img className={classes.image} src={props.viewData.imageUrl} />
+            <div elevation={0} className={classes.column}>
+                <div className={classes.marginLeft}>
+                    <Text17Black> {props.viewData.offering}</Text17Black>
+                    <Text17gray06> {props.viewData.longDescription}</Text17gray06>
+                    <Text17gray06> {props.viewData.offeringSubText}</Text17gray06>
+                    <div className={classes.pricerow}>
+                        <Text17gray06> {props.viewData.cost}</Text17gray06>
                         <Text17Green className={classes.margin5}>ON REQUEST</Text17Green>
-                        <ButtonBlue className={classes.margin5} onClick= {onPressAdd}> Add</ButtonBlue>
+                        <AddOrder />
                     </div>
-                </Paper>
+                </div>
             </div>
-        </Paper>
+        </div>
     );
 }
 

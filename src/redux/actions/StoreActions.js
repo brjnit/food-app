@@ -1,11 +1,11 @@
 import APIRequest from '../../network/APIRequest/APIRequest';
-import { PARTNER_OFFERINGS, PARTNER_DETAILS} from './actionTypes';
+import { PARTNER_OFFERINGS, PARTNER_DETAILS, ORDER} from './actionTypes';
 
 
 export const getPartnerDetails = (partnerId) => {
     return (dispatch) => {
         let apiRequest = new APIRequest();
-        apiRequest.callAPI("getPartnerDetails", { "partnerId": "15439" }).then((response) => {
+        apiRequest.callAPI("getPartnerDetails", { "partnerId": partnerId}).then((response) => {
             console.log("[StoreAction.js] getPartnerDetails status :: " + response)
             if (response.status == 200) {
                 response = response.data;
@@ -18,7 +18,27 @@ export const getPartnerDetails = (partnerId) => {
 const partnerDetailsResult = (data) =>{
     return {
         type: PARTNER_DETAILS,
-        result : data
+        partnerDetails : data
+    }
+}
+
+export const getProductsList = (partnerId) => {
+    return (dispatch) => {
+        let apiRequest = new APIRequest();
+        apiRequest.callAPI("getProductsList", { "partnerId": partnerId}).then((response) => {
+            console.log("[StoreAction.js] getPartnerDetails status :: " + response)
+            if (response.status == 200) {
+                response = response.data;
+                 dispatch(productListResult(response));
+            }
+        });
+    }
+}
+
+const productListResult = (data) =>{
+    return {
+        type: PARTNER_DETAILS,
+        productList : data
     }
 }
 
@@ -27,7 +47,7 @@ const partnerDetailsResult = (data) =>{
 export const getPartnerOfferings = (partnerId) => {
     return (dispatch) => {
         let apiRequest = new APIRequest();
-        apiRequest.callAPI("getPartnerOfferings", { "partnerId": "15439" }).then((response) => {
+        apiRequest.callAPI("getPartnerOfferings", { "partnerId": partnerId }).then((response) => {
             console.log("[storeaction.js] response partnerOfferings", response)
             if (response.status == 200) {
                 response = response.data;
@@ -41,5 +61,12 @@ const partnerOfferingsResult = (data) =>{
     return {
         type: PARTNER_OFFERINGS,
         result : data
+    }
+}
+
+export const getOrders = (data) =>{
+    return {
+        type: ORDER,
+        orders : data
     }
 }

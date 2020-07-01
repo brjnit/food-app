@@ -4,8 +4,9 @@ Author: Brajesh Kumar
 
 import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core';
-import Text6 from '../components/UI/Text/Text6';
 import {isMobile} from 'react-device-detect';
+import { useDispatch, useSelector } from 'react-redux'
+import { getPartnerOfferings, getPartnerDetails } from '../redux/actions/StoreActions';
 
 const useStyles = makeStyles({
     root: {
@@ -55,28 +56,21 @@ const useStyles = makeStyles({
 });
 
 const StoreFront = (props) => {
-    
+  const partnerDetails = useSelector(state => state.landing.partnerDetails);
+  const partnerOfferings = useSelector(state => state.landing.offerings);
+  const dispatch = useDispatch();
     const classes = useStyles()
-    
+    useEffect(() => {
+        dispatch(getPartnerDetails());
+        dispatch(getPartnerOfferings())
+    }, []
+    );
+
     return (
     <div className={classes.root}>
-        <div className={classes.start}>
-            <Text6>Hello world</Text6>
-            <Text6>Hello world</Text6>
-            <Text6>Hello world</Text6>
-            <Text6>Hello world</Text6>
-            <div className={classes.profile}>
-                <img className={classes.image} src="https://captainamericadiag618.blob.core.windows.net/uploaded-files/partnerCoverPhoto_15439_1583485492.jpg" />
-                <div className={classes.start}>
-                    <Text6>Hello world</Text6>
-                    <Text6>Hello world</Text6>
-                    <Text6>Hello world</Text6>
-                </div>
-
-            </div>
-            <Text6>Hello world</Text6>
-
-        </div>
+        {console.log("#details #  ", partnerDetails, partnerOfferings)
+        
+        }
     </div>)
 }
 

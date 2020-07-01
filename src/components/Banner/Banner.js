@@ -1,8 +1,5 @@
-import React, {Component, useState} from 'react'
-import Text5 from '../UI/Text/Text5'
-import Text6 from '../UI/Text/Text6'
-//import {formatDateTime} from '../../util'
-//import { getLocalizedString } from '../../localization/i18n'
+import React, { useState} from 'react'
+import {Text17gray00} from '../UI/Text/Text'
 import { makeStyles } from '@material-ui/core/styles';
 import Color from '../../Color'
 import { isMobile } from 'react-device-detect';
@@ -144,13 +141,13 @@ const Banner = (props) => {
                         <img src = {{uri:imageUri}} resizeMode = 'stretch' style = {getBackgroudStyle()}/>
                         
                         <div className = {getBannerTextContainerStyle()}>
-                            <Text5 style = {styles.bannerText} numberOfLines = {1}>{props.bannerHeading}</Text5>
-                            <Text6 numberOfLines ={2}>{props.bannerSubText}</Text6>
+                            <Text17gray00 style = {styles.bannerText} numberOfLines = {1}>{props.bannerHeading}</Text17gray00>
+                            <Text17gray00 numberOfLines ={2}>{props.bannerSubText}</Text17gray00>
                         </div>
                         {image}
                     </button>
                 <div className = {styles.lastUpdatedView}>
-                    <Text6 className = {styles.updatedText}> formatDateTime(props.updatedTime)}</Text6>
+                    <Text17gray00 className = {styles.updatedText}> formatDateTime(props.updatedTime)}</Text17gray00>
                 </div>
             </div>
         )

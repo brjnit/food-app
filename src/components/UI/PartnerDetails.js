@@ -1,8 +1,5 @@
 import React from 'react'
-import { Avatar } from '@material-ui/core'
 import ImageAvatars from './ImageAvatars'
-import Text1 from './Text/Text1'
-import Text6 from './Text/Text6'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -17,10 +14,7 @@ const useStyles = makeStyles(theme => ({
     horizontal: {
         width: '100%',
         display: "flex",
-        flexDirection: "row",
-        flexBasis: "a",
-
-        backgroundColor: "green"
+        flexDirection: "row"
     },
     horizontalText: {
         marginLeft: 10,
@@ -33,33 +27,31 @@ const useStyles = makeStyles(theme => ({
         flexBasis: "auto",
         flexWrap: "wrap",
         flexShrink: "0",
+        marginTop: 20
     },
 
     verticalText: {
         marginLeft: 10,
-        marginTop: 5
     }
 }));
 
-const HContainer = (props) => {
+const PartnerDetails = ({ partnerViewData }) => {
     const classes = useStyles();
     return (<div >
         <div className={classes.horizontal}>
-          
-                <ImageAvatars small={false} src="https://captainamericadiag618.blob.core.windows.net/uploaded-files/partnerCoverPhoto_15439_1583485492.jpg" />
-                
+            <ImageAvatars small={false} src={partnerViewData.image}/>
             <div className={classes.vertical}>
-            <div className={classes.verticalText}>{props.longDescription} </div>
-            <div className={classes.verticalText}>{props.longDescription} </div>
+                <div className={classes.verticalText}>{partnerViewData.name} </div>
+                <div className={classes.verticalText}>{partnerViewData.contactNumber} </div>
+                <div className={classes.verticalText}>{partnerViewData.address} </div>
             </div>
-
         </div>
         <div className={classes.root}>
-            <Text6 className = {classes.horizontalText}> Product description</Text6>
+            <div className={classes.verticalText}>{partnerViewData.description} </div>
         </div>
-        </div>
+    </div>
     )
 }
 
-export default HContainer
+export default PartnerDetails
 

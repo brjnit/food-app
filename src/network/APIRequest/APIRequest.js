@@ -69,16 +69,4 @@ export default class APIRequest {
         }
         return body
     }
-
-    getPartnerOfferings = (requestTemplate, inputParams)=>{
-        let body = {
-            method: requestTemplate.method,
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(inputParams)
-        }
-        return body
-    }
 }

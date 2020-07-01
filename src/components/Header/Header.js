@@ -21,11 +21,17 @@ const useStyles = makeStyles((theme) => ({
     },
 
     title: {
-        flexGrow: 1,
-        flexDirection: "row",
+        fontSize: 18,
         justifyContent: "center",
         alignContent: 'center'
     },
+
+    toolbar: {
+        minHeight: 90,
+        alignItems: 'flex-end',
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(2),
+    }
 }));
 
 const Header = (props) => {
@@ -33,8 +39,8 @@ const Header = (props) => {
     return (
         <div className={classes.root}>
             <AppBar position="static" color='transparent'>
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
+                <Toolbar className={classes.root}>
+                    <Typography variant="h6" gutterBottom>
                         {props.title}
                     </Typography>
                 </Toolbar>

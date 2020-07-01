@@ -1,5 +1,5 @@
 import { styled } from '@material-ui/core/styles';
-import color from '../../Color'
+import color from '../../../Color'
 
 export const Text17gray01 = styled('div')({
     fontSize: 17,
@@ -22,5 +22,10 @@ export const Text17gray02 = styled('div')({
 export const Text17gray00 = styled('div')({
     fontSize: 17,
     color: color.gray00,
+    fontFamily: 'roboto'
+});
+export const Text17gray06 = styled('div')({
+    fontSize: 17,
+    color: color.gray06,
     fontFamily: 'roboto'
 });

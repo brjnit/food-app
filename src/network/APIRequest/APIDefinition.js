@@ -11,7 +11,12 @@ const apiList = {
         path : "/partner/$partnerId?",
         method : GET,
         params : ["partnerId"]
-    }
+    },
+    getProductsList : {
+        path : "/partnerOffering/$partnerId?partnerOfferingType=CATALOGUE",
+        method : GET,
+        params : ["partnerId"]
+    },
 }
 
 export const getAPITemplate = (apiName) =>{

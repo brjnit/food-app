@@ -1,6 +1,5 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
-
 import LandingReducer from '../reducer/LandingReducer';
 import SummaryReducer from '../reducer/SummaryReducer';
 

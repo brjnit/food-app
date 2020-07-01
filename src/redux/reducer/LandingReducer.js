@@ -1,20 +1,20 @@
-import { ADD, PARTNER_DETAILS, PARTNER_OFFERINGS, ORDER } from '../actions/actionTypes'
+import { ADD, PARTNER_DETAILS, PARTNER_OFFERINGS, ORDER, PRODUCT_LIST } from '../actions/actionTypes'
 
 const initialState = {
     offerings: [],
-    details: [],
-    orders: {
-
-    }
+    partnerDetails: {},
+    orders:{},
+    productList: {}
 }
 const LandingReducer = (state = initialState, action) => {
     console.log("action:  ", action)
+    console.log("action:  ", state)
     switch (action.type) {
         case ADD: {
             return {
                 ...state,
                 offerings: {
-                   // ...action.selectedStore
+                    // ...action.selectedStore
                 }
             }
         }
@@ -22,25 +22,29 @@ const LandingReducer = (state = initialState, action) => {
         case PARTNER_OFFERINGS: {
             return {
                 ...state,
-                offerings: {
-                    //...action.selectedStore
-                }
+                offerings: action.result
             }
         }
         case PARTNER_DETAILS: {
             return {
                 ...state,
-                details: action.result
-
+                partnerDetails: { ...action.partnerDetails }
             }
         }
+
+        case PRODUCT_LIST: {
+            return {
+                ...state,
+                productList: { ...action.productList }
+            }
+        }
+
         case ORDER: {
             return {
                 ...state,
-                orders: action.orders
+                orders: {...action.orders}
             }
         }
-
     }
     return state;
 }
