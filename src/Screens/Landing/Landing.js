@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     },
     banner: {
         height: 120,
-        background: colors.textOrange,
+        background: colors.white,
     },
     partnerOfferings: {
         //background: ' #FFF009 ',
@@ -63,32 +63,20 @@ const useStyles = makeStyles({
 const Landing = (props) => {
     const classes = useStyles();
     const partnerDetails = useSelector(state => state.landing.partnerDetails);
-    const partnerOfferings = useSelector(state => state.landing.offerings);
+    const catloglaData = useSelector(state => state.landing.offerings.catloglaData);
+    const bannerData = useSelector(state => state.landing.offerings.bannerData);
+
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false)
-    const partnerViewData = {
-        name: partnerDetails.name,
-        address: partnerDetails.address,
-        contactNumber: partnerDetails.contactNumber,
-        description: partnerDetails.description,
-        image: partnerDetails.coverPicture
-    }
-
-    const partnerOfferingsViewData =
-        partnerOfferings != null && partnerOfferings.filter(item => item.isActive)
-            .map(item => {
-                console.log("item : ", item)
-                return {
-                    imageUrl: item.imageUrl,
-                    offering: item.offering,
-                    offeringSubText: item.offeringSubText,
-                    partnerOfferingType: item.partnerOfferingType,
-                    longDescription: item.longDescription,
-                    createdAt: item.createdAt,
-                    cost: item.cost
-                }
-            });
-
+    const orders = [{
+        itemName: "chapati",
+        amount: 20,
+        quantity: 4
+    }, {
+        itemName: "chapati",
+        amount: 20,
+        quantity: 4
+    }]
     useEffect(() => {
         dispatch(getPartnerDetails("3929")); //partnerID
         dispatch(getPartnerOfferings("3929"))
@@ -101,30 +89,28 @@ const Landing = (props) => {
     return (
         <div className={classes.root}>
             <Wrapper>
-                <Header title={partnerViewData.name}></Header>
-                <PartnerDetails partnerViewData={partnerViewData}></PartnerDetails>
+                <Header title={partnerDetails.name}></Header>
+                <PartnerDetails partnerViewData={partnerDetails}></PartnerDetails>
                 <div className={classes.banner}>
-                    Banner
-                        {/* <Banner 
-                         bannerImage = ""
-                         bannerBackgroudImage = ""
-                         width ="100%"
-                         bannerText= "New Offers"
-                         bannerHeading = "Discont"
-                         bannerSubText= "Early bird"
-                         updatedTime= "732"
-                        /> */}
+
+                    {bannerData != null && (<Banner
+                        bannerImage={bannerData.imageUrl}
+                        // bannerBackgroudImage = ""
+                        bannerText={bannerData.offering}
+                        bannerHeading="Discont"
+                        bannerSubText={bannerData.offeringSubText}
+                        updatedTime={bannerData.updateDate}
+                    />)
+                    }
+
                 </div>
-
-
                 <div className={classes.partnerOfferings} >
-                    <Product partnerOfferingsViewData={partnerOfferingsViewData} />
+                    <Product partnerOfferingsViewData={catloglaData} />
                 </div>
-
                 <div className={classes.footer}>
                     <ButtonBlue className={classes.button} onClick={onPressOrder}> Order </ButtonBlue>
                 </div>
-                {(showModal) && (<ReviewModal />)}
+                {(showModal) && (<ReviewModal show={showModal} orders={orders} />)}
             </Wrapper>
         </div>
     )

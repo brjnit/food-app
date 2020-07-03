@@ -9,8 +9,8 @@ const Product = ({ partnerOfferingsViewData, productSelectHandler }) => {
   return (
     <div>
       <h7>Products </h7>
-
-      {partnerOfferingsViewData.map(item => {
+{console.log("partnerOfferingsViewData", partnerOfferingsViewData)}
+      {(partnerOfferingsViewData !== undefined) && partnerOfferingsViewData.map(item => {
         
         return <PartnerOffering
           viewData={item}
