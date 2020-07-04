@@ -106,7 +106,7 @@ const Banner = (props) => {
                 <div >{props.bannerHeading}</div>
                 <div >{props.bannerSubText}</div>
                 <Text17gray06 style={useStyles.bannerText}>{props.bannerText}</Text17gray06>
-                <img src={imageUri} resizeMode='stretch' style={useStyles.imageStyle} />
+                <img src={imageUri}  style={useStyles.imageStyle} />
             </div>
             <div style={useStyles.lastUpdatedView}>  <div style={useStyles.bannerText}> Updated {props.updatedTime}</div> </div>
 

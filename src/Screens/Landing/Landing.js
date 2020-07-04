@@ -16,6 +16,7 @@ import { ButtonBlue } from '../../components/UI/Button';
 
 import Modal from '@material-ui/core/Modal';
 import ReviewModal from '../../components/ReviewModal';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -68,6 +69,7 @@ const Landing = (props) => {
 
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false)
+    const [isConfirmed, setConfirmed] = useState(false)
     const orders = [{
         itemName: "chapati",
         amount: 20,
@@ -79,15 +81,20 @@ const Landing = (props) => {
     }]
     useEffect(() => {
         dispatch(getPartnerDetails("3929")); //partnerID
+    }, []);
+    useEffect(() => {
         dispatch(getPartnerOfferings("3929"))
     }, []);
 
     const onPressOrder = () => {
-        setShowModal(!showModal)
+        //setShowModal(!showModal)
+        setConfirmed(true)
+       
     }
 
     return (
-        <div className={classes.root}>
+        <div>
+            {!isConfirmed && (<div className={classes.root}>
             <Wrapper>
                 <Header title={partnerDetails.name}></Header>
                 <PartnerDetails partnerViewData={partnerDetails}></PartnerDetails>
@@ -112,6 +119,9 @@ const Landing = (props) => {
                 </div>
                 {(showModal) && (<ReviewModal show={showModal} orders={orders} />)}
             </Wrapper>
+        </div>)}
+        {isConfirmed && <Redirect to = "/summary" from = "landing"/>}
+
         </div>
     )
 }

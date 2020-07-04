@@ -1,4 +1,4 @@
-
+export const PARTNERS_LIST = 'PARTNERS_LIST'
 export const ADD = 'ADD'
 export const ORDER = 'ORDER'
 export const PARTNER_DETAILS = 'PARTNER_DETAILS'

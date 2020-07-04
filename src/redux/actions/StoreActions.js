@@ -1,7 +1,40 @@
 import APIRequest from '../../network/APIRequest/APIRequest';
-import { PARTNER_OFFERINGS, PARTNER_DETAILS, ORDER } from './actionTypes';
+import { PARTNERS_LIST, PARTNER_OFFERINGS, PARTNER_DETAILS, ORDER } from './actionTypes';
 import { formatDateTime } from '../../util';
 
+export const getPartnerLists = (partnerId) => {
+    return (dispatch) => {
+        const response = [{
+            id: "23",
+            imageUrl: "https://captainamericadiag618.blob.core.windows.net/uploaded-files/message_f6c00241-524e-4381-ad10-18bdbfaad1f5.jpg",
+            title: "Litto",
+            description: "Cuisines from Bihar"
+        },
+        {
+            id: "24",
+            imageUrl: "https://captainamericadiag618.blob.core.windows.net/uploaded-files/message_f6c00241-524e-4381-ad10-18bdbfaad1f5.jpg",
+            title: "Biryani By Killo",
+            description: "Always be reason to celebrate"
+        }]
+        dispatch(partnersListResult(response));
+        // let apiRequest = new APIRequest();
+        // apiRequest.callAPI("getPartnerDetails", { "partnerId": partnerId }).then((response) => {
+        //     console.log("[StoreAction.js] getPartnerDetails status :: " + response)
+        //     if (response.status == 200) {
+        //         response = response.data;
+        //         dispatch(partnerDetailsResult(response));
+        //     }
+        // });
+    }
+}
+
+const partnersListResult = (data) => {
+
+    return {
+        type: PARTNERS_LIST,
+        partnersList: data
+    }
+}
 
 export const getPartnerDetails = (partnerId) => {
     return (dispatch) => {
@@ -70,6 +103,7 @@ const partnerOfferingsResult = (data) => {
         .map(item => {
             console.log("CATALOGUE item : ", item)
             return {
+                key: item.id,
                 imageUrl: item.imageUrl,
                 offering: item.offering,
                 offeringSubText: item.offeringSubText,
@@ -95,26 +129,26 @@ const partnerOfferingsResult = (data) => {
     //             cost: item.cost
     //         }
     //     });
-        let bannerData = {}
-        let updateDate = null
-        data != null && data.forEach(item => {
-            if (item.partnerOfferingType == "BANNER" && item.isActive){
-                const newUpdateDate = formatDateTime(item.updatedAt)
-                if (newUpdateDate != null ) {
-                    updateDate = newUpdateDate;
-                    bannerData = {
-                        imageUrl: item.imageUrl,
-                        offering: item.offering,
-                        offeringSubText: item.offeringSubText,
-                        partnerOfferingType: item.partnerOfferingType,
-                        longDescription: item.longDescription,
-                        updateDate: updateDate,
-                        cost: item.cost
-                    }
+    let bannerData = {}
+    let updateDate = null
+    data != null && data.forEach(item => {
+        if (item.partnerOfferingType == "BANNER" && item.isActive) {
+            const newUpdateDate = formatDateTime(item.updatedAt)
+            if (newUpdateDate != null) {
+                updateDate = newUpdateDate;
+                bannerData = {
+                    imageUrl: item.imageUrl,
+                    offering: item.offering,
+                    offeringSubText: item.offeringSubText,
+                    partnerOfferingType: item.partnerOfferingType,
+                    longDescription: item.longDescription,
+                    updateDate: updateDate,
+                    cost: item.cost
                 }
             }
-        });
-        
+        }
+    });
+
     return {
         type: PARTNER_OFFERINGS,
         result: {

@@ -2,8 +2,11 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 import LandingReducer from '../reducer/LandingReducer';
 import SummaryReducer from '../reducer/SummaryReducer';
+import PartnersReducer from '../reducer/PartnersReducer';
+
 
 const rootReducer = combineReducers({
+    partners : PartnersReducer,
     landing : LandingReducer,
     summary: SummaryReducer
 });

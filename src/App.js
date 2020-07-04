@@ -1,8 +1,8 @@
 import React from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Redirect, withRouter, Switch } from "react-router-dom";
 import Landing from "./Screens/Landing/Landing";
 import Summary from "./Screens/Summary/Summary";
-import StoreFront from "./Screens/StoreFront";
+import Partenrs from "./Screens/Partners/Partners";
 import { makeStyles } from '@material-ui/core';
 import { isMobile } from 'react-device-detect';
 
@@ -23,9 +23,11 @@ function App() {
   return (
     <div className="container">
       <div className={classes.root}>
-        <Redirect to="/" from="/landing" />
-        <Route path="/" component={Landing} />
-        <Route path="/success" component={Summary} />
+        <Switch>
+          <Route exact path="/" component={Partenrs} />
+          <Route exact path="/landing" component={Landing} />
+          <Route path="/summary" component={Summary} />
+        </Switch>
       </div>
     </div>
   );

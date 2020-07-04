@@ -13,6 +13,7 @@ const Product = ({ partnerOfferingsViewData, productSelectHandler }) => {
       {(partnerOfferingsViewData !== undefined) && partnerOfferingsViewData.map(item => {
         
         return <PartnerOffering
+          id = {item.id}
           viewData={item}
           productSelectHandler={productSelectHandler}
         />

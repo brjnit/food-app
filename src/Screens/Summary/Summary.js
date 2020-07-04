@@ -21,6 +21,7 @@ const Summary = (props) => {
         <Wrapper>
             <div className={classes.root}>
                 {console.log(props)}
+              Summary Screen
             </div>
         </Wrapper>
     )
