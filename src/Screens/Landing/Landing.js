@@ -99,7 +99,7 @@ const Landing = (props) => {
                 <Header title={partnerDetails.name}></Header>
                 <PartnerDetails partnerViewData={partnerDetails}></PartnerDetails>
                 <div className={classes.banner}>
-
+{console.log(props)}
                     {bannerData != null && (<Banner
                         bannerImage={bannerData.imageUrl}
                         // bannerBackgroudImage = ""

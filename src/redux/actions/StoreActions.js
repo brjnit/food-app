@@ -4,35 +4,31 @@ import { formatDateTime } from '../../util';
 
 export const getPartnerLists = (partnerId) => {
     return (dispatch) => {
-        const response = [{
-            id: "23",
-            imageUrl: "https://captainamericadiag618.blob.core.windows.net/uploaded-files/message_f6c00241-524e-4381-ad10-18bdbfaad1f5.jpg",
-            title: "Litto",
-            description: "Cuisines from Bihar"
-        },
-        {
-            id: "24",
-            imageUrl: "https://captainamericadiag618.blob.core.windows.net/uploaded-files/message_f6c00241-524e-4381-ad10-18bdbfaad1f5.jpg",
-            title: "Biryani By Killo",
-            description: "Always be reason to celebrate"
-        }]
-        dispatch(partnersListResult(response));
-        // let apiRequest = new APIRequest();
-        // apiRequest.callAPI("getPartnerDetails", { "partnerId": partnerId }).then((response) => {
-        //     console.log("[StoreAction.js] getPartnerDetails status :: " + response)
-        //     if (response.status == 200) {
-        //         response = response.data;
-        //         dispatch(partnerDetailsResult(response));
-        //     }
-        // });
+        let apiRequest = new APIRequest();
+        apiRequest.callAPI("partnersInSameGroup", { "partnerId": partnerId }).then((response) => {
+            console.log("[StoreAction.js] partnersInSameGroup status :: " + response)
+            if (response.status == 200) {
+                response = response.data;
+                dispatch(partnersListResult(response));
+            }
+        });
     }
 }
 
 const partnersListResult = (data) => {
+    
+    const partnersList = data != null && data
+    // .filter(item => (item.partnerOfferingType == "CATALOGUE" && item.isActive))
+     .map(item => {
+         return {id: item.id,
+         imageUrl: item.coverPicture,
+         title: item.name,
+         description: item.description}
+     })
 
     return {
         type: PARTNERS_LIST,
-        partnersList: data
+        partnersList: partnersList
     }
 }
 

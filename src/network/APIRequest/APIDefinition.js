@@ -12,8 +12,8 @@ const apiList = {
         method : GET,
         params : ["partnerId"]
     },
-    getProductsList : {
-        path : "/partnerOffering/$partnerId?partnerOfferingType=CATALOGUE",
+    partnersInSameGroup : {
+        path : "/partnersInSameGroup/$partnerId?",
         method : GET,
         params : ["partnerId"]
     },

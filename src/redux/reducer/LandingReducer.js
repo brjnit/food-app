@@ -7,8 +7,6 @@ const initialState = {
     productList: {}
 }
 const LandingReducer = (state = initialState, action) => {
-    console.log("action:  ", action)
-    console.log("action:  ", state)
     switch (action.type) {
         case ADD: {
             return {

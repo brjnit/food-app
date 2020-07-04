@@ -36,6 +36,7 @@ const Partenrs = (props) => {
     const dispatch = useDispatch();
     const classes = useStyles()
     const [isNavigate, setNavigate] = useState(false)
+    const [id, setID] = useState("")
     useEffect(() => {
         dispatch(getPartnerLists("456"));
         // return () => {
@@ -48,11 +49,12 @@ const Partenrs = (props) => {
         //props.onItemSelected(id);
         console.log(id)
         setNavigate(true)
+setID(id)
     };
 
     return (
         <div>
-            {isNavigate && <Redirect to="/landing" from="/" />}
+            {isNavigate && <Redirect to={id} from="/" />}
             {!isNavigate && (<div className={classes.root}>
             <Header title="Express Eats" />
                 <List className={classes.list} component="nav">
