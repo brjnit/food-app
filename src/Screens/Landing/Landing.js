@@ -16,7 +16,7 @@ import { ButtonBlue } from '../../components/UI/Button';
 
 import Modal from '@material-ui/core/Modal';
 import ReviewModal from '../../components/ReviewModal';
-import { Redirect } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
     root: {
@@ -88,10 +88,7 @@ const Landing = (props) => {
     }, []);
 
     const onPressOrder = () => {
-        //setShowModal(!showModal)
-        setConfirmed(true)
-        props.history.push(`/partners/${props.match.params.id}` )
-       
+        setShowModal(!showModal)
     }
 
     return (
@@ -123,8 +120,6 @@ const Landing = (props) => {
                 {(showModal) && (<ReviewModal show={showModal} orders={orders} />)}
             </Wrapper>
         </div>)}
-        {isConfirmed && <Redirect to = "/summary"/>}
-
         </div>
     )
 }
