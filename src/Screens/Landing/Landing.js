@@ -80,15 +80,17 @@ const Landing = (props) => {
         quantity: 4
     }]
     useEffect(() => {
-        dispatch(getPartnerDetails("3929")); //partnerID
+        console.log(props.match.params)
+        dispatch(getPartnerDetails(props.match.params.id)); //partnerID
     }, []);
     useEffect(() => {
-        dispatch(getPartnerOfferings("3929"))
+        dispatch(getPartnerOfferings(props.match.params.id))
     }, []);
 
     const onPressOrder = () => {
         //setShowModal(!showModal)
         setConfirmed(true)
+        props.history.push(`/partners/${props.match.params.id}` )
        
     }
 
@@ -96,10 +98,11 @@ const Landing = (props) => {
         <div>
             {!isConfirmed && (<div className={classes.root}>
             <Wrapper>
-                <Header title={partnerDetails.name}></Header>
+                <Header title={partnerDetails.name} 
+                isBack = {true} 
+                onBackPress = {() => props.history.goBack()}/>
                 <PartnerDetails partnerViewData={partnerDetails}></PartnerDetails>
                 <div className={classes.banner}>
-{console.log(props)}
                     {bannerData != null && (<Banner
                         bannerImage={bannerData.imageUrl}
                         // bannerBackgroudImage = ""
@@ -120,7 +123,7 @@ const Landing = (props) => {
                 {(showModal) && (<ReviewModal show={showModal} orders={orders} />)}
             </Wrapper>
         </div>)}
-        {isConfirmed && <Redirect to = "/summary" from = "landing"/>}
+        {isConfirmed && <Redirect to = "/summary"/>}
 
         </div>
     )

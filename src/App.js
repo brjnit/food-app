@@ -24,9 +24,9 @@ function App() {
     <div className="container">
       <div className={classes.root}>
         <Switch>
-          <Route exact path="/" component={Partenrs} />
-          <Route exact path="/landing" component={Landing} />
-          <Route path="/summary" component={Summary} />
+          <Route exact path="/partners" component={Partenrs} />
+          <Route exact path="/partners/:id" component={Landing} />
+          <Route exact path="/summary" component={Summary} />
         </Switch>
       </div>
     </div>

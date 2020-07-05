@@ -8,10 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Call from '@material-ui/icons/Call';
-import ArrowBackSharp from '@material-ui/icons/ArrowBackSharp';
+//import Call from '@material-ui/icons/Call';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
     },
 
     title: {
-        fontSize: 18,
-        justifyContent: "center",
-        alignContent: 'center'
+        // fontSize: 18,
+        textAlign: "center",
+        width: '100%',
     },
 
     toolbar: {
@@ -40,7 +40,17 @@ const Header = (props) => {
         <div className={classes.root}>
             <AppBar position="static" color='transparent'>
                 <Toolbar className={classes.root}>
-                    <Typography variant="h6" gutterBottom>
+                    {props.isBack && <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="menu"
+                        onClick = {props.onBackPress}
+                    >
+                        <ArrowBack />
+                    </IconButton>}
+
+                    <Typography className={classes.title} variant="h6" gutterBottom>
                         {props.title}
                     </Typography>
                 </Toolbar>

@@ -8,9 +8,9 @@ const useStyles = {
     root: {
         marginTop: 10,
         flexGrow: 1,
-        height: 120,
         width: "100%",
-        backgroundColor: 'brown'
+        backgroundColor: 'brown',
+        borderRadius:3
     },
 
     title: {
