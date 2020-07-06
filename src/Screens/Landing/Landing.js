@@ -75,7 +75,7 @@ const Landing = (props) => {
         amount: 20,
         quantity: 4
     }, {
-        itemName: "chapati",
+        itemName: "Curry",
         amount: 20,
         quantity: 4
     }]

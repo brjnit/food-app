@@ -8,8 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router-dom';
+import { ButtonBlue } from './UI/Button';
 
 const TAX_RATE = 0.07;
 
@@ -54,7 +54,7 @@ function ReviewModal(props) {
   const handleConfirm = () => {
     console.log("order successful")
     setConfirmed(true)
-    props.history.push(`/partners/${props.match.params.id}` )
+    //props.history.push(`/summary` )
   }
   const classes = useStyles();
   return (
@@ -69,7 +69,7 @@ function ReviewModal(props) {
           <Modal.Title>Order Summary</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <TableContainer component={Paper}>
+        <TableContainer >
       <Table className={classes.table} aria-label="spanning table">
         <TableHead>
           <TableRow>
@@ -115,7 +115,7 @@ function ReviewModal(props) {
           
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleConfirm}>Confirm</Button>
+          <ButtonBlue onClick={handleConfirm}>Confirm</ButtonBlue>
         </Modal.Footer>
         {isConfirmed && <Redirect to = "/summary"/>}
       </Modal>

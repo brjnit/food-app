@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
 const PartnerOffering = (props) => {
     const classes = useStyles();
     return (
-        <div key = {props.viewData.key} className={classes.row}>
+        <div key = {props.key} className={classes.row}>
             <img className={classes.image} src={props.viewData.imageUrl} />
             <div elevation={0} className={classes.column}>
                 <div className={classes.marginLeft}>

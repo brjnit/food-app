@@ -10,34 +10,34 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         width: "17%",
-        borderWidth:3,
+        borderWidth: 3,
         borderColor: "red",
         backgroundColor: "white",
-      },
-      plus : {
+    },
+    plus: {
         backgroundColor: colors.textGreen,
         color: "white",
         fontSize: 22,
-        '&:hover' : {
+        '&:hover': {
             background: colors.textGreen
-        }    
-      },
-      minus : {
+        }
+    },
+    minus: {
         backgroundColor: colors.textRed,
         color: "white",
         fontSize: 22,
-        '&:hover' : {
+        '&:hover': {
             background: colors.textRed
-        }    
-      },
-      add: {
+        }
+    },
+    add: {
         width: "17%",
         backgroundColor: colors.textGreen,
         color: "white",
-        '&:hover' : {
+        '&:hover': {
             background: colors.textGreen
-        }    
-      },
+        }
+    },
 
     text: {
         fontSize: 22,
@@ -64,17 +64,17 @@ const AddOrder = ({ productSelectHandler }) => {
 
     return (
         <div>
-          {(orderAdded > 0) && (   
-        <div className = {classes.root}>
-        <ButtonGroup size="small" disableElevation variant="contained" >
-          <Button className = {classes.minus} onClick={onMinus}>-</Button>
-          <div className = {classes.text}>{orderAdded} </div>
-          <Button className = {classes.plus} onClick={onPlus} >+</Button>
-        </ButtonGroup>
-        </div>)}
-        {(orderAdded == 0) && (<Button className = {classes.add} onClick={onPlus}>ADD</Button>)}
-       </div>
-      );
+            {(orderAdded > 0) && (
+                <div className={classes.root}>
+                    <ButtonGroup size="small" disableElevation variant="contained" >
+                        <Button className={classes.minus} onClick={onMinus}>-</Button>
+                        <div className={classes.text}>{orderAdded} </div>
+                        <Button className={classes.plus} onClick={onPlus} >+</Button>
+                    </ButtonGroup>
+                </div>)}
+            {(orderAdded == 0) && (<Button className={classes.add} onClick={onPlus}>ADD</Button>)}
+        </div>
+    );
 }
 
 export default AddOrder

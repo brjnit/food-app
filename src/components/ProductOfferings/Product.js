@@ -4,16 +4,15 @@ Author: Brajesh Kumar
 
 import React from 'react'
 import PartnerOffering from './PartnerOffering';
+import { Text22Black } from '../UI/Text/TextBlack';
 
 const Product = ({ partnerOfferingsViewData, productSelectHandler }) => {
   return (
     <div>
-      <h7>Products </h7>
-{console.log("partnerOfferingsViewData", partnerOfferingsViewData)}
+      <Text22Black>Products</Text22Black>
       {(partnerOfferingsViewData !== undefined) && partnerOfferingsViewData.map(item => {
-        
         return <PartnerOffering
-          id = {item.id}
+          key={item.id}
           viewData={item}
           productSelectHandler={productSelectHandler}
         />
