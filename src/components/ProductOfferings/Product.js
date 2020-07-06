@@ -6,7 +6,7 @@ import React from 'react'
 import PartnerOffering from './PartnerOffering';
 import { Text22Black } from '../UI/Text/TextBlack';
 
-const Product = ({ partnerOfferingsViewData, productSelectHandler }) => {
+const Product = ({ partnerOfferingsViewData, prodctAddDeleteHandler }) => {
   return (
     <div>
       <Text22Black>Products</Text22Black>
@@ -14,7 +14,7 @@ const Product = ({ partnerOfferingsViewData, productSelectHandler }) => {
         return <PartnerOffering
           key={item.id}
           viewData={item}
-          productSelectHandler={productSelectHandler}
+          productSelectHandler={prodctAddDeleteHandler}
         />
       })}
     </div>

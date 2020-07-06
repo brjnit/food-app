@@ -107,7 +107,7 @@ const PartnerOffering = (props) => {
                     <div className={classes.pricerow}>
                         <Text17gray06> {props.viewData.cost}</Text17gray06>
                         <Text17Green className={classes.margin5}>ON REQUEST</Text17Green>
-                        <AddOrder/>
+                        <AddOrder prodctAddDeleteHandler = {props.prodctAddDeleteHandler} {...props}/>
                     </div>
                 </div>
                 <div className = {classes.line}></div>

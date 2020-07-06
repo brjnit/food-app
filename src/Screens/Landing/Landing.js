@@ -70,6 +70,7 @@ const Landing = (props) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false)
     const [isConfirmed, setConfirmed] = useState(false)
+    const [cartProductCount, setCartProductCount] = useState([])
     const orders = [{
         itemName: "chapati",
         amount: 20,
@@ -90,6 +91,36 @@ const Landing = (props) => {
     const onPressOrder = () => {
         setShowModal(!showModal)
     }
+
+     /***************************************************************
+     * funtion : prodctAddDeleteHandler 
+     * description : to handle the plus minus action for a product
+     *               and update cart accordingly
+     ****************************************************************/
+    const prodctAddDeleteHandler = (value, id, type) =>{
+        console.log("[StoreFront.js] value, id :: ", value, id, type)
+
+        let countData = [...cartProductCount]
+
+        const index = countData.findIndex((e) => e.id ==id);
+        if (index === -1) {
+            countData.push({id : id, count : 1, type : type});
+        } else {
+            if(value == 0){
+                countData.splice(index, 1)
+            }else{
+                let row = countData[index];
+                countData[index] = {...row, count : value};
+            } 
+        }
+        setCartProductCount(countData)
+        console.log(" countData", countData)
+        // this.setState({
+        //     cartProductCount : countData,
+        //     selectedProductCount : value
+        // })
+    }
+   
 
     return (
         <div>
@@ -112,7 +143,7 @@ const Landing = (props) => {
 
                 </div>
                 <div className={classes.partnerOfferings} >
-                    <Product partnerOfferingsViewData={catloglaData} />
+                    <Product partnerOfferingsViewData={catloglaData} prodctAddDeleteHandler = {prodctAddDeleteHandler}/>
                 </div>
                 <div className={classes.footer}>
                     <ButtonBlue className={classes.button} onClick={onPressOrder}> Order </ButtonBlue>

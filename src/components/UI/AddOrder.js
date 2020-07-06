@@ -48,19 +48,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AddOrder = ({ productSelectHandler }) => {
+const AddOrder = ({viewData, productSelectHandler }) => {
     const classes = useStyles();
     const [orderAdded, setOrder] = useState(0)
     const orders = useSelector(state => state.landing.orders);
     const dispatch = useDispatch();
     const onPlus = () => {
         setOrder((prevOreder) => { return prevOreder + 1 })
-        dispatch(getOrders(orderAdded))
+        console.log("AddOrder ", viewData)
+        productSelectHandler(orderAdded + 1,viewData.key, "")
     }
     const onMinus = () => {
         setOrder((prevOreder) => { return prevOreder - 1 })
-        dispatch(getOrders(orderAdded))
+        productSelectHandler(orderAdded - 1, viewData.key, "")
     }
+
 
     return (
         <div>

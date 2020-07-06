@@ -23,7 +23,7 @@ const useStyles = {
         width: '100%',
         justifyContent: 'center',
         marginBottom: 10,
-        height: 120
+       // height: 120
     },
     bannerText: {
         fontWeight: isMobile ? '600' : '500',
