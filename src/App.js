@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Redirect, withRouter, Switch } from "react-router-dom";
 import Landing from "./Screens/Landing/Landing";
 import Summary from "./Screens/Summary/Summary";
+import RegistrationPhoneNumber from "./Screens/RegistrationPhoneNumber/RegistrationPhoneNumber";
 import Partenrs from "./Screens/Partners/Partners";
 import { makeStyles } from '@material-ui/core';
 import { isMobile } from 'react-device-detect';
@@ -24,6 +25,7 @@ function App() {
     <div className="container">
       <div className={classes.root}>
         <Switch>
+          <Route exact path="/registration" component={RegistrationPhoneNumber} />
           <Route exact path="/partners" component={Partenrs} />
           <Route exact path="/partners/:id" component={Landing} />
           <Route exact path="/summary" component={Summary} />

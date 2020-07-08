@@ -1,6 +1,16 @@
-import { GET } from "./MethodType";
+import { GET,POST } from "./MethodType";
 
 const apiList = {
+    sendOTP : {
+        path : "/authentication/sendOtp",
+        method : POST,
+        params : ["mobile"]
+    },
+    verifyOTP :{
+        path : "/authentication/verifyOtp",
+        method : POST,
+        params : ["mobile", "otp", "userType"]        
+    },
     getPartnerOfferings : {
         path : "/partnerOffering/$partnerId?partnerOfferingType=ALL",
         method : GET,
