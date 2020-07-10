@@ -24,8 +24,8 @@ const useStyles = makeStyles({
         flexDirection: 'column',
         background: colors.white,
         border: 0,
-        borderRadius: 3,
-        width: '100%'
+        width: '100%',
+        //alignItems: 'center',
     },
 
     main: {
@@ -36,15 +36,18 @@ const useStyles = makeStyles({
 
     profile: {
         // background: ' #0FF003 ',
+        width: '100%',
     },
     banner: {
         height: 120,
         background: colors.white,
+        width: '100%',
     },
     partnerOfferings: {
         //background: ' #FFF009 ',
         marginTop: 50,
-        marginLeft: 16
+        marginLeft: 16,
+        marginRight: 16
     },
 
     footer: {
@@ -61,7 +64,7 @@ const useStyles = makeStyles({
 
 });
 
-const Landing = (props) => {
+const StoreFront = (props) => {
     const classes = useStyles();
     const partnerDetails = useSelector(state => state.landing.partnerDetails);
     const catloglaData = useSelector(state => state.landing.offerings.catloglaData);
@@ -129,9 +132,8 @@ const Landing = (props) => {
                 <Header title={partnerDetails.name} 
                 isBack = {true} 
                 onBackPress = {() => props.history.goBack()}/>
-                <PartnerDetails partnerViewData={partnerDetails}></PartnerDetails>
-                <div className={classes.banner}>
-                    {bannerData != null && (<Banner
+                <PartnerDetails className={classes.profile} partnerViewData={partnerDetails}></PartnerDetails>
+                {bannerData != null && bannerData.length>0 && (<Banner
                         bannerImage={bannerData.imageUrl}
                         // bannerBackgroudImage = ""
                         bannerText={bannerData.offering}
@@ -140,13 +142,13 @@ const Landing = (props) => {
                         updatedTime={bannerData.updateDate}
                     />)
                     }
-
-                </div>
-                <div className={classes.partnerOfferings} >
+                    {catloglaData !=null && catloglaData.length>0 &&
+                    <div className={classes.partnerOfferings} >
                     <Product partnerOfferingsViewData={catloglaData} prodctAddDeleteHandler = {prodctAddDeleteHandler}/>
-                </div>
+                </div>}
+                
                 <div className={classes.footer}>
-                    <ButtonBlue className={classes.button} onClick={onPressOrder}> Order </ButtonBlue>
+                    <ButtonBlue disabled = {!(cartProductCount.length>0)} className={classes.button} onClick={onPressOrder}> Order </ButtonBlue>
                 </div>
                 {(showModal) && (<ReviewModal show={showModal} orders={orders} />)}
             </Wrapper>
@@ -156,4 +158,4 @@ const Landing = (props) => {
 }
 
 
-export default Landing;
+export default StoreFront;

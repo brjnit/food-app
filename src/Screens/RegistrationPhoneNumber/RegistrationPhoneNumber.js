@@ -60,7 +60,13 @@ const useStyles = makeStyles((theme) => ({
     },
     arroWBack: {
         backgroundColor: 'transparent',
-        borderWidth: 0
+        borderWidth: 0,
+        '&:hover': {
+            background: colors.grayBlueBG
+        },
+        '&:disabled': {
+            background: colors.blueInactive
+        }
     }
 
 }));
@@ -101,7 +107,11 @@ const RegistrationPhoneNumber = (props) => {
             props.history.push("/registration")
         }
     }
-    const handleChangeOTP = otp => { setOTP(otp) }
+    const handleChangeOTP = (event) => {
+        const value = event.target.value
+        setOTP(value)
+    }
+
 
     return (
 
@@ -124,8 +134,14 @@ const RegistrationPhoneNumber = (props) => {
                         onChange={handleChangeOTP}
                     />}
             </div>
+            {console.log(otp)}
             <div className={classes.footer}>
-                <ButtonBlue className={classes.button} onClick={proceedButtonAction}>{!isOTP ? 'AGREE AND CONTINUE' : 'VERIFY'}  </ButtonBlue>
+                <ButtonBlue
+                    disabled={!isOTP ? !(mobNum.length > 0) : !(otp.length > 0)}
+                    className={classes.button}
+                    onClick={proceedButtonAction}>
+                    {!isOTP ? 'AGREE AND CONTINUE' : 'VERIFY'}
+                </ButtonBlue>
             </div>
         </div>
     )

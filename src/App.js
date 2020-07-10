@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect, withRouter, Switch } from "react-router-dom";
-import Landing from "./Screens/Landing/Landing";
+import StoreFront from "./Screens/StoreFront/StoreFront";
 import Summary from "./Screens/Summary/Summary";
 import RegistrationPhoneNumber from "./Screens/RegistrationPhoneNumber/RegistrationPhoneNumber";
 import Partenrs from "./Screens/Partners/Partners";
@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/custmerInfo" component={CustmerInfo} />
           <Route exact path="/registration" component={RegistrationPhoneNumber} />
           <Route exact path="/partners" component={Partenrs} />
-          <Route exact path="/partners/:id" component={Landing} />
+          <Route exact path="/partners/:id" component={StoreFront} />
           <Route exact path="/summary" component={Summary} />
         </Switch>
     </div>

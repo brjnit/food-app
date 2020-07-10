@@ -68,7 +68,7 @@ const AddOrder = ({viewData, productSelectHandler }) => {
         <div>
             {(orderAdded > 0) && (
                 <div className={classes.root}>
-                    <ButtonGroup size="small" disableElevation variant="contained" >
+                    <ButtonGroup size="small"  variant="contained" >
                         <Button className={classes.minus} onClick={onMinus}>-</Button>
                         <div className={classes.text}>{orderAdded} </div>
                         <Button className={classes.plus} onClick={onPlus} >+</Button>

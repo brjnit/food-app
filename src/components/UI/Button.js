@@ -12,6 +12,9 @@ export const ButtonBlue = styled(Button)({
     padding: '0 30px',
     '&:hover' : {
         background: color.blue
-    }    
+    } ,
+    '&:disabled' : {
+        background: color.blueInactive  
+    } 
 });
 

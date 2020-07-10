@@ -4,14 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop : 20,
-        marginRight: 6
+        marginTop : 10,
+        marginRight: 12
     },
 
     line : {
         backgroundColor : colors.gray03,
         width : '100%',
-        marginTop : 2,
+        marginTop : 10,
         height : 1
     }
 }));

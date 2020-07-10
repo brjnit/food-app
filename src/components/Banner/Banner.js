@@ -10,7 +10,7 @@ const useStyles = {
         flexGrow: 1,
         width: "100%",
         backgroundColor: 'brown',
-        borderRadius:3
+        borderRadius: 3
     },
 
     title: {
@@ -23,24 +23,20 @@ const useStyles = {
         width: '100%',
         justifyContent: 'center',
         marginBottom: 10,
-       // height: 120
+        // height: 120
     },
     bannerText: {
         fontWeight: isMobile ? '600' : '500',
         marginBottom: 5,
     },
     lastUpdatedView: {
-        //width: '95%',
         marginTop: 5,
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        //marginRight : '5%',
-        marginBottom: 5
-    },
-    updatedText: {
-        fontStyle: 'italic',
+        justifyContent: 'flex-end',
+        marginBottom: 5,
         color: Color.gray01,
+        fontStyle: 'italic',
     },
     bannerContainer: {
         flexDirection: 'row',
@@ -105,10 +101,14 @@ const Banner = (props) => {
             <div style={useStyles.root}>
                 <div >{props.bannerHeading}</div>
                 <div >{props.bannerSubText}</div>
-                <Text17gray06 style={useStyles.bannerText}>{props.bannerText}</Text17gray06>
-                <img src={imageUri}  style={useStyles.imageStyle} />
+                <Text17gray06 style={useStyles.bannerText}>
+                    {props.bannerText}
+                </Text17gray06>
+                <img src={imageUri} style={useStyles.imageStyle} />
             </div>
-            <div style={useStyles.lastUpdatedView}>  <div style={useStyles.bannerText}> Updated {props.updatedTime}</div> </div>
+            <div style={useStyles.lastUpdatedView}>
+                Updated {props.updatedTime}
+            </div>
 
         </div>
     )
