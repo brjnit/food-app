@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: colors.grayBlueBG,
     },
     arroWBack: {
-        backgroundColor : 'transparent',
+        backgroundColor: 'transparent',
         borderWidth: 0
     }
 
@@ -93,10 +93,11 @@ const RegistrationPhoneNumber = (props) => {
 
     const proceedButtonAction = () => {
         if (isValid && !isOTP) {
-           dispatch(verifyNumber(mobNum));
+            dispatch(verifyNumber(mobNum));
             setIsOTP(true)
         } else {
             setotpVerifySuccess(true)
+            dispatch(verifyOTP(otp))
             props.history.push("/registration")
         }
     }
@@ -106,8 +107,8 @@ const RegistrationPhoneNumber = (props) => {
 
         <div className={classes.root}>
             <div className={classes.header}>
-                {isOTP && <button className={classes.arroWBack} onClick = {() =>setIsOTP(false)}><ArrowBack/></button>}
-            </div> 
+                {isOTP && <button className={classes.arroWBack} onClick={() => setIsOTP(false)}><ArrowBack /></button>}
+            </div>
             {otpVerifySuccess && <Redirect to={`/partners`} from="/registration" />}
             <div className={classes.topContainer}>
                 <img className={classes.logo} src={Logo} />
