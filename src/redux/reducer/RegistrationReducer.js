@@ -1,4 +1,4 @@
-import {PHONE_NUMBER, VERIFY_NUMBER} from '../actions/actionTypes'
+import {REGISTER_USER,PHONE_NUMBER, VERIFY_NUMBER} from '../actions/actionTypes'
 
 const initialState = {
     usrDtls :{
@@ -8,6 +8,18 @@ const initialState = {
 }
 const RegistrationReducer = (state = initialState, action) => {
     switch (action.type){
+        case REGISTER_USER: {
+            return {
+                ...state,
+                usrDtls : {
+                    ...state.usrDtls,
+                    customerId : action.customerId,
+                    name : action.name,
+                    emailId : action.emailId
+                }
+
+            }
+        }
         case PHONE_NUMBER: {
             return {
                 ...state,

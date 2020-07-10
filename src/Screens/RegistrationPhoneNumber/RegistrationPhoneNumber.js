@@ -2,7 +2,7 @@
 Author: Brajesh Kumar
 */
 
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Logo from '../../img/DailyGetLogo.png'
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,18 +10,13 @@ import colors from '../../Color'
 import PhoneInput from '../../components/PhoneInput'
 import { ButtonBlue } from '../../components/UI/Button'
 import OTPINPUT from '../../components/OTPINPUT/OTPINPUT';
-import {verifyNumber, verifyOTP} from '../../redux/actions/RegistrationActions';
+import { verifyNumber, verifyOTP } from '../../redux/actions/RegistrationActions';
 import { Redirect } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-    },
-
-    container: {
-        flex: 1,
-        backgroundColor: colors.white,
-        flexDirection: 'Column',
         width: '100%'
     },
     topContainer: {
@@ -31,15 +26,16 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: colors.grayBlueBG,
     },
     middleContainer: {
-        height: 250,
+        marginTop: 30,
+        marginLeft: 30,
+        marginRight: 30,
+        height: 180,
     },
     logo: {
-        width: '70%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20
+        width: '80%',
+        marginTop: "10%",
+        marginLeft: "10%",
+        marginRight: "10%",
     },
 
     footer: {
@@ -69,9 +65,9 @@ const RegistrationPhoneNumber = (props) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-       
+
         //console.log(props.match.params)
-        
+
     }, []);
 
     const onChangeMobNumHandler = (event) => {
@@ -84,7 +80,7 @@ const RegistrationPhoneNumber = (props) => {
 
     const proceedButtonAction = () => {
         if (isValid && !isOTP) {
-            //dispatch(verifyNumber(mobNum));
+            dispatch(verifyNumber(mobNum));
             setIsOTP(true)
         } else {
             setotpVerifySuccess(true)
@@ -94,26 +90,25 @@ const RegistrationPhoneNumber = (props) => {
     const handleChangeOTP = otp => { setOTP(otp) }
 
     return (
-        
+
         <div className={classes.root}>
-        {otpVerifySuccess && <Redirect to={`/partners` } from="/registration" />}
+            <Header backgroundColor={colors.grayBlueBG} isBack={isOTP} />
+            {otpVerifySuccess && <Redirect to={`/partners`} from="/registration" />}
             <div className={classes.topContainer}>
-                <div className={classes.logo}>
-                    <img width='100%' src={Logo} />
-                </div>
+                <img className={classes.logo} src={Logo} />
             </div>
             <div className={classes.middleContainer}>
                 {!isOTP ? <PhoneInput
-                    value = {mobNum} 
+                    value={mobNum}
                     placeholder={"registration_phone_placeholder"}
                     onChange={onChangeMobNumHandler} />
-                    : <OTPINPUT 
-                    value = {otp}
-                    codeLength = {4}
-                    onChange={handleChangeOTP}
+                    : <OTPINPUT
+                        value={otp}
+                        codeLength={4}
+                        onChange={handleChangeOTP}
                     />}
             </div>
-            <div>
+            <div className={classes.footer}>
                 <ButtonBlue className={classes.button} onClick={proceedButtonAction}>{!isOTP ? 'AGREE AND CONTINUE' : 'VERIFY'}  </ButtonBlue>
             </div>
         </div>

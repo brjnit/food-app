@@ -12,7 +12,7 @@ import style from "./OTPInput.css";
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
-            margin: theme.spacing(4),
+            margin: theme.spacing(3),
             width: '15%',
         },
         conatainer: {
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
         input: {
             textAlign: 'center',
         }
-
     },
 }));
 const OTPINPUT = (props) => {
@@ -34,11 +33,11 @@ const OTPINPUT = (props) => {
         <div className={classes.conatainer} >
             <div className={classes.titleText} >Verify OTP sent to your Number</div>
             <form className={classes.root} noValidate autoComplete="off">
-
-                <TextField className={style.input} id="standard-secondary" label="" error = {false} autoFocus = {true} maxLength = {1}/>
-                <TextField id="standard-secondary" label="" />
-                <TextField id="standard-secondary" label=""  />
-                <TextField id="standard-secondary" label="" />
+                <TextField className={style.input} id="standard-secondary" 
+                label=""
+                error = {false} 
+                autoFocus = {true} 
+                inputProps={{maxLength: 4}}/>
             </form>
         </div>)
 }

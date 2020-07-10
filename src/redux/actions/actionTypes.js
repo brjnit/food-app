@@ -1,5 +1,6 @@
 export const PHONE_NUMBER = 'PHONE_NUMBER'
 export const VERIFY_NUMBER = 'VERIFY_NUMBER'
+export const REGISTER_USER = 'REGISTER_USER'
 export const PARTNERS_LIST = 'PARTNERS_LIST'
 export const ADD = 'ADD'
 export const ORDER = 'ORDER'

@@ -1,6 +1,11 @@
 import { GET,POST } from "./MethodType";
 
 const apiList = {
+    registerUser: {
+        path : "/consumer",
+        method : POST,
+        params : ["name", "phoneNumber", "emailId"]
+    },
     sendOTP : {
         path : "/authentication/sendOtp",
         method : POST,
