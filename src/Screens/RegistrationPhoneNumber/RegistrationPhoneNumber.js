@@ -12,7 +12,7 @@ import { ButtonBlue } from '../../components/UI/Button'
 import OTPINPUT from '../../components/OTPINPUT/OTPINPUT';
 import { verifyNumber, verifyOTP } from '../../redux/actions/RegistrationActions';
 import { Redirect } from 'react-router-dom';
-import Header from '../../components/Header/Header';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +49,18 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: 48,
     },
+    header: {
+        height: '95',
+        paddingTop: 30,
+        paddingLeft: "5%",
+        paddingBottom: 8,
+        fontSize: 22,
+        backgroundColor: colors.grayBlueBG,
+    },
+    arroWBack: {
+        backgroundColor : 'transparent',
+        borderWidth: 0
+    }
 
 }));
 
@@ -58,7 +70,7 @@ const RegistrationPhoneNumber = (props) => {
     const classes = useStyles();
     const [mobNum, setMobNum] = useState('')
     const [isValid, setIsValid] = useState(false)
-    const [isOTP, setIsOTP] = useState(true)
+    const [isOTP, setIsOTP] = useState(false)
     const [otp, setOTP] = useState('')
     const [otpVerifySuccess, setotpVerifySuccess] = useState(false)
     const phoneNumber = useSelector(state => state.registration.usrDtls);
@@ -80,7 +92,7 @@ const RegistrationPhoneNumber = (props) => {
 
     const proceedButtonAction = () => {
         if (isValid && !isOTP) {
-            dispatch(verifyNumber(mobNum));
+           // dispatch(verifyNumber(mobNum));
             setIsOTP(true)
         } else {
             setotpVerifySuccess(true)
@@ -92,7 +104,9 @@ const RegistrationPhoneNumber = (props) => {
     return (
 
         <div className={classes.root}>
-            <Header backgroundColor={colors.grayBlueBG} isBack={isOTP} />
+            <div className={classes.header}>
+                {isOTP && <button className={classes.arroWBack} onClick = {() =>setIsOTP(false)}><ArrowBack/></button>}
+            </div> 
             {otpVerifySuccess && <Redirect to={`/partners`} from="/registration" />}
             <div className={classes.topContainer}>
                 <img className={classes.logo} src={Logo} />

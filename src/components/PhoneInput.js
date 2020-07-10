@@ -1,7 +1,7 @@
 import React from 'react'
 import colors from '../Color'
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Grid } from '@material-ui/core';
+import { TextField, Input } from '@material-ui/core';
 import CountryCode from './CountryCode';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +33,15 @@ const PhoneInput = (props) => {
             <div className={classes.titleText} >{"Verify your phone number"}</div>
             <div className={classes.root}>
                 <CountryCode />
-                <TextField className={classes.inputStyle}
+                <Input
+                    className={classes.inputStyle}
                     id="phone-number"
-                    label={props.placeholder}
+                    placeholder = {props.placeholder}
+                    onChange = {props.onChange}
+                    autoFocus = {true} 
                     keyboardType='numeric'
-                    inputProps={{ maxLength: 10 }} {...props} />
+                    inputProps={{maxLength: 10}}
+                />
             </div>
             <div className={classes.linkStyle}>
                 <a href={'https://dailyget.in/legal'} target="_blank"  >Terms and conditions and Privacy policy </a>
