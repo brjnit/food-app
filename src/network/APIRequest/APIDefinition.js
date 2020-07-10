@@ -32,6 +32,11 @@ const apiList = {
         method : GET,
         params : ["partnerId"]
     },
+    sumbitEnquiry : {
+        path : "/enquiry",
+        method : POST,
+        params : ["customerId", "enquiryMessage", "partnerId", "channel"]
+    },
 }
 
 export const getAPITemplate = (apiName) =>{

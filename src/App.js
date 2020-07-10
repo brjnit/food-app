@@ -8,6 +8,7 @@ import CustmerInfo from "./Screens/CustmerInfo/CustmerInfo";
 import { makeStyles } from '@material-ui/core';
 import { isMobile } from 'react-device-detect';
 import Header from "./components/Header/Header";
+import EnquirySuccess from "./Screens/EnquirySuccess/EnquirySuccess";
 
 const useStyles = makeStyles({
   root: {
@@ -33,13 +34,14 @@ function App() {
   const classes = useStyles()
   return (
     <div className="container">
-        <Switch>
+      <Switch>ß
+        <Route exact path="/enquirySuccess" component={EnquirySuccess} />
         <Route exact path="/custmerInfo" component={CustmerInfo} />
-          <Route exact path="/registration" component={RegistrationPhoneNumber} />
-          <Route exact path="/partners" component={Partenrs} />
-          <Route exact path="/partners/:id" component={StoreFront} />
-          <Route exact path="/summary" component={Summary} />
-        </Switch>
+        <Route exact path="/registration" component={RegistrationPhoneNumber} />
+        <Route exact path="/partners" component={Partenrs} />
+        <Route exact path="/partners/:id" component={StoreFront} />
+        <Route exact path="/summary" component={Summary} />
+      </Switch>
     </div>
   );
 }
