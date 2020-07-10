@@ -33,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
     },
     logo: {
         width: '80%',
-        marginTop: "10%",
+        marginTop: "5%",
         marginLeft: "10%",
         marginRight: "10%",
+        height: "70%"
     },
 
     footer: {
@@ -92,7 +93,7 @@ const RegistrationPhoneNumber = (props) => {
 
     const proceedButtonAction = () => {
         if (isValid && !isOTP) {
-           // dispatch(verifyNumber(mobNum));
+           dispatch(verifyNumber(mobNum));
             setIsOTP(true)
         } else {
             setotpVerifySuccess(true)
