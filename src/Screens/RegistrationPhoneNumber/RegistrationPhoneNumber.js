@@ -13,6 +13,8 @@ import OTPINPUT from '../../components/OTPINPUT/OTPINPUT';
 import { verifyNumber, verifyOTP } from '../../redux/actions/RegistrationActions';
 import { Redirect } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import Cookies from 'js-cookie';
+import Encryption from '../../Auth/encrypt';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -102,9 +104,11 @@ const RegistrationPhoneNumber = (props) => {
             dispatch(verifyNumber(mobNum));
             setIsOTP(true)
         } else {
+            const encryptedValue = Encryption.Encrypt("473");
+            Cookies.set("key", encryptedValue)
             setotpVerifySuccess(true)
             dispatch(verifyOTP(otp))
-            props.history.push("/registration")
+            //props.history.push("/registration")
         }
     }
     const handleChangeOTP = (event) => {

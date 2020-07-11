@@ -1,14 +1,12 @@
-import React from "react";
-import { Route, Redirect, withRouter, Switch } from "react-router-dom";
-import StoreFront from "./Screens/StoreFront/StoreFront";
-import Summary from "./Screens/Summary/Summary";
-import RegistrationPhoneNumber from "./Screens/RegistrationPhoneNumber/RegistrationPhoneNumber";
-import Partenrs from "./Screens/Partners/Partners";
-import CustmerInfo from "./Screens/CustmerInfo/CustmerInfo";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import { isMobile } from 'react-device-detect';
 import Header from "./components/Header/Header";
-import EnquirySuccess from "./Screens/EnquirySuccess/EnquirySuccess";
+import Routes from "./Routes";
+import AuthApi from './Auth/Auth';
+import Cookies from 'js-cookie';
+import Encryption from './Auth/encrypt';
 
 const useStyles = makeStyles({
   root: {
@@ -32,18 +30,27 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles()
+  const [auth, setAuth] = useState(false)
+  const readCookie = () => {
+    const encryptedValue = Cookies.get("key")
+    const Value = Encryption.Decrypt(encryptedValue)
+    if (Value) {
+      setAuth(true)
+    }
+  }
+
+  useEffect(() => {
+    readCookie();
+  }, []);
   return (
     <div className="container">
-      <Switch>ß
-        <Route exact path="/enquirySuccess" component={EnquirySuccess} />
-        <Route exact path="/custmerInfo" component={CustmerInfo} />
-        <Route exact path="/registration" component={RegistrationPhoneNumber} />
-        <Route exact path="/partners" component={Partenrs} />
-        <Route exact path="/partners/:id" component={StoreFront} />
-        <Route exact path="/summary" component={Summary} />
-      </Switch>
+      <AuthApi.Provider value={{ auth, setAuth }}>
+        <Router>
+          <Routes />
+        </Router>
+      </AuthApi.Provider>
     </div>
   );
 }
 
-export default withRouter(App);
+export default App;
