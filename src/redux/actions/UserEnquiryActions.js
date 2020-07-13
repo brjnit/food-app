@@ -43,12 +43,13 @@ export const getEnquiriesForCustomer = () => {
                     dispatch(getEnquiryListResult(response.data));
                     const [ConsumerName, phoneNumber, campus] = response.data
                     const partnerId = "459"
-                    enquiryMessage = JSON.Stringify({
+                    const enquiryObj = {
                         "name": ConsumerName,
                         "phoneNumber": phoneNumber,
                         "comingFromArea": campus
-                    }),
-                        dispatch(sumbitEnquiry(customerId, partnerId, enquiryMessage))
+                    }
+                    const enquiryMessage = JSON.stringify(enquiryObj)
+                 dispatch(sumbitEnquiry(customerId, partnerId, enquiryMessage))
                 }
             }
         });
