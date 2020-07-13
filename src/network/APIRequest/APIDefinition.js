@@ -4,7 +4,7 @@ const apiList = {
     registerUser: {
         path : "/consumer",
         method : POST,
-        params : ["name", "phoneNumber", "emailId"]
+        params : ["name", "phoneNumber", "campus"]
     },
     sendOTP : {
         path : "/authentication/sendOtp",
@@ -35,7 +35,17 @@ const apiList = {
     sumbitEnquiry : {
         path : "/enquiry",
         method : POST,
-        params : ["customerId", "enquiryMessage", "partnerId", "channel"]
+        params : ["customerId", "internalFields", "partnerId", "channel"]
+    },
+    getEnquiriesForCustomer : {
+        path : "/enquiry/consumer/$consumerId",
+        method : GET,
+        params : ["consumerId"]
+    },
+    getCustomerDetails : {
+        path : "/consumer/$customerId",
+        method : GET,
+        params : ["customerId"]
     },
 }
 

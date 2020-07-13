@@ -5,8 +5,9 @@ import { isMobile } from 'react-device-detect';
 import Header from "./components/Header/Header";
 import Routes from "./Routes";
 import AuthApi from './Auth/Auth';
-import Cookies from 'js-cookie';
-import Encryption from './Auth/encrypt';
+import cookie from './Auth/MyCookies';
+import { useDispatch } from "react-redux";
+import { getCustomerDetails } from "./redux/actions/RegistrationActions";
 
 const useStyles = makeStyles({
   root: {
@@ -31,11 +32,13 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
   const [auth, setAuth] = useState(false)
+
+  const dispatch = useDispatch();
   const readCookie = () => {
-    const encryptedValue = Cookies.get("key")
-    const Value = Encryption.Decrypt(encryptedValue)
-    if (Value) {
-      setAuth(true)
+    const cookieValue = cookie.readCookie("key")
+    if (cookieValue) {
+        setAuth(true)
+        dispatch(getCustomerDetails(cookieValue))
     }
   }
 

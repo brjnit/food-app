@@ -1,12 +1,15 @@
-import {REGISTER_USER,PHONE_NUMBER, VERIFY_NUMBER} from '../actions/actionTypes'
+import {REGISTER_USER,PHONE_NUMBER, VERIFY_NUMBER, UPDATE_USER_DETAILS} from '../actions/actionTypes'
 
 const initialState = {
     usrDtls :{
-        mobNum : '9999999999',
-        customerId : 1
+        phoneNumber : '9999999999',
+        customerId : 1,
+        isVerified: false,
+
     }
 }
 const RegistrationReducer = (state = initialState, action) => {
+    console.log("usrDtls", action)
     switch (action.type){
         case REGISTER_USER: {
             return {
@@ -15,9 +18,21 @@ const RegistrationReducer = (state = initialState, action) => {
                     ...state.usrDtls,
                     customerId : action.customerId,
                     name : action.name,
-                    emailId : action.emailId
+                    phoneNumber : action.phoneNumber
                 }
 
+            }
+        }
+        case UPDATE_USER_DETAILS: {
+            return {
+                ...state,
+                usrDtls : {
+                    ...state.usrDtls,
+                    customerId : action.customerId,
+                    name : action.name,
+                    campus : action.campus,
+                    mobNum : action.mobNum
+                }
             }
         }
         case PHONE_NUMBER: {
@@ -25,7 +40,7 @@ const RegistrationReducer = (state = initialState, action) => {
                 ...state,
                 usrDtls : {
                     ...state.usrDtls,
-                    mobNum : action.mobNum,
+                    phoneNumber : action.phoneNumber,
                 }
             }
         }  
@@ -34,7 +49,8 @@ const RegistrationReducer = (state = initialState, action) => {
                 ...state,
                 usrDtls : {
                     ...state.usrDtls,
-                    mobNum : action.mobNum,
+                    phoneNumber : action.phoneNumber,
+                    isVerified : action.isVerified,
                 }
             }
         }        

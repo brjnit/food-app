@@ -1,29 +1,58 @@
-import { REGISTER_USER, VERIFY_NUMBER } from '../actions/actionTypes'
+import { REGISTER_USER, VERIFY_NUMBER, UPDATE_USER_DETAILS } from '../actions/actionTypes'
 import APIRequest from "../../network/APIRequest/APIRequest";
+import cookie from '../../Auth/MyCookies';
 
-export const registerUser = (name, phoneNumber, emailId) => {
+export const registerUser = (name, phoneNumber, address) => {
     return (dispatch) => {
         let apiRequest = new APIRequest()
         let inputParam = {
             "name": name,
             "phoneNumber": phoneNumber,
-            "emailId": emailId
+            "campus": address
         };
         apiRequest.callAPI("registerUser", inputParam).then((response) => {
-            console.log("[RegistrationAction.js] response", response)
+            console.log("[RegistrationAction.js] response", response.data)
             if (response.status == 200) {
-                dispatch(registerUserResult(name, emailId, response.id))
+                cookie.setCookie("key", response.data.id)
+                dispatch(registerUserResult(name, phoneNumber, response.data.id))
             }
         });
     }
 }
 
-export const registerUserResult = (name, emailId, customerId) => {
+export const registerUserResult = (name, phoneNumber, customerId) => {
     return {
         type: REGISTER_USER,
         name: name,
-        emailId: emailId,
+        phoneNumber: phoneNumber,
         customerId: customerId
+    }
+}
+
+export const getCustomerDetails = (customerId) =>{
+    return (dispatch)=>{
+        let apiRequest = new APIRequest()
+        let inputParam = {"customerId" : customerId};
+        apiRequest.callAPI("getCustomerDetails", inputParam).then((response) =>{
+            console.log("[RegistrationAction.js] response", response)
+            if(response.status == 200){
+                console.log("[RegistrationAction.js] getCustomerDetails response :: "+ JSON.stringify(response));
+                response = response.data;
+                dispatch(updateCustomerDetails(response.name, response.campus, response.phoneNumber, customerId));
+                //establishConnection(customerId);
+               // goToLandingScreen();
+            }
+        }); 
+    }
+}
+
+export const updateCustomerDetails = (name, campus, mobNum, customerId) =>{
+    return {
+        type: UPDATE_USER_DETAILS,
+        name : name,
+        campus : campus,
+        customerId : customerId,
+        mobNum : mobNum
     }
 }
 
@@ -43,7 +72,7 @@ export const verifyNumber = (mobNum) => {
 export const verifyNumberResult = (mobNum) => {
     return {
         type: VERIFY_NUMBER,
-        mobNum: mobNum
+        phoneNumber: mobNum
     }
 }
 
@@ -55,8 +84,10 @@ export const verifyOTP = (mobNum, OTP) => {
             console.log("[RegistrationAction.js] response verifyOTP", response)
             if (response.status == 200) {
                 response = response.data
-                if (response.isNewUser) {
-                    // pushScreen('mainApp', 'dailyget.registrationCustDetails');
+                
+                if (response.isVerified) {
+                    console.log("usrDtls", response.isVerified)
+                    dispatch(verifyOTPResult(mobNum, response.isVerified));
                 } else {
                     const customerId = response.id
                     //dispatch(getCustomerDetails(customerId));
@@ -70,9 +101,10 @@ export const verifyOTP = (mobNum, OTP) => {
     }
 }
 
-export const verifyOTPResult = (mobNum) => {
+export const verifyOTPResult = (mobNum, isVerified) => {
     return {
         type: VERIFY_NUMBER,
-        mobNum: mobNum
+        phoneNumber: mobNum,
+        isVerified: isVerified
     }
 }

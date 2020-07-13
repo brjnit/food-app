@@ -2,11 +2,12 @@
 Author: Brajesh Kumar
 */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import colors from '../../Color'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import QRCode from 'qrcode.react'
+import { getEnquiriesForCustomer } from '../../redux/actions/UserEnquiryActions';
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
@@ -47,20 +48,24 @@ const useStyles = makeStyles({
 
 const EnquirySuccess = (props) => {
     const classes = useStyles();
-    
-    const [name, setName] = useState('')
-    
+    const enquiries = useSelector(state => state.enquiry.enquiries); 
+    const usrDtls = useSelector(state => state.registration.usrDtls);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getEnquiriesForCustomer())
+    }, []);
     return (
         <div className={classes.root}>
-            <QRCode
-            id="123456"
-            value="123456"
+            {console.log("enquiries",enquiries)}
+            {usrDtls.customerId &&  <QRCode
+            id={usrDtls.customerId}
+            value= {usrDtls.customerId}
             size={290}
             level={"H"}
             includeMargin={true}
             >
-
-            </QRCode>
+            </QRCode>}
+           
         </div>
     )
 }

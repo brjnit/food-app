@@ -4,12 +4,15 @@ import LandingReducer from '../reducer/LandingReducer';
 import SummaryReducer from '../reducer/SummaryReducer';
 import PartnersReducer from '../reducer/PartnersReducer';
 import RegistrationReducer from '../reducer/RegistrationReducer';
+import UserEnquiryReducer from '../reducer/UserEnquiryReducer';
+
 
 const rootReducer = combineReducers({
     registration: RegistrationReducer,
     partners : PartnersReducer,
     landing : LandingReducer,
-    summary: SummaryReducer
+    summary: SummaryReducer,
+    enquiry:UserEnquiryReducer
 });
 
 let composeEnhancers = compose;

@@ -11,10 +11,9 @@ import PhoneInput from '../../components/PhoneInput'
 import { ButtonBlue } from '../../components/UI/Button'
 import OTPINPUT from '../../components/OTPINPUT/OTPINPUT';
 import { verifyNumber, verifyOTP } from '../../redux/actions/RegistrationActions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import Cookies from 'js-cookie';
-import Encryption from '../../Auth/encrypt';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -82,21 +81,30 @@ const RegistrationPhoneNumber = (props) => {
     const [isOTP, setIsOTP] = useState(false)
     const [otp, setOTP] = useState('')
     const [otpVerifySuccess, setotpVerifySuccess] = useState(false)
-    const phoneNumber = useSelector(state => state.registration.usrDtls);
-
+    const usrDtls = useSelector(state => state.registration.usrDtls); //isVerified
+    const history = useHistory()
     const dispatch = useDispatch();
-    useEffect(() => {
 
-        //console.log(props.match.params)
-
-    }, []);
+    // useEffect(() => {
+    //     console.log("usrDtls", usrDtls)
+    //    if(usrDtls.isVerified) {
+    //     setotpVerifySuccess(true)
+    //     // history.push('/registration',
+    //     //         {
+    //     //             mobileNumber: mobNum
+    //     //         }
+    //     //     )
+    //    }
+    // }, []);
 
     const onChangeMobNumHandler = (event) => {
         const value = event.target.value
         let isValid = /^([6-9]\d{9})$/.test(value)
         console.log("[RegistrationPhoneNumber.js] phone number valid ", value, isValid)
-        setMobNum(value)
         setIsValid(isValid)
+        if (isValid) {
+            setMobNum(value)
+        }
     }
 
     const proceedButtonAction = () => {
@@ -104,11 +112,8 @@ const RegistrationPhoneNumber = (props) => {
             dispatch(verifyNumber(mobNum));
             setIsOTP(true)
         } else {
-            const encryptedValue = Encryption.Encrypt("473");
-            Cookies.set("key", encryptedValue)
+            dispatch(verifyOTP(mobNum,otp))
             setotpVerifySuccess(true)
-            dispatch(verifyOTP(otp))
-            //props.history.push("/registration")
         }
     }
     const handleChangeOTP = (event) => {
@@ -120,10 +125,12 @@ const RegistrationPhoneNumber = (props) => {
     return (
 
         <div className={classes.root}>
+            {console.log("usrDtls", usrDtls)}
+            {console.log("props.history",history)}
             <div className={classes.header}>
                 {isOTP && <button className={classes.arroWBack} onClick={() => setIsOTP(false)}><ArrowBack /></button>}
             </div>
-            {otpVerifySuccess && <Redirect to={`/partners`} from="/registration" />}
+            {otpVerifySuccess && <Redirect to={`/custmerInfo`} from="/registration" />}
             <div className={classes.topContainer}>
                 <img className={classes.logo} src={Logo} />
             </div>
@@ -152,4 +159,4 @@ const RegistrationPhoneNumber = (props) => {
 }
 
 //473 customer
-export default RegistrationPhoneNumber 
+export default RegistrationPhoneNumber;

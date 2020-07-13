@@ -2,7 +2,7 @@ const CryptoJS = require("crypto-js");
 const secretKey = "key@123";
 //Encrypt
 const Encrypt = (value) => {
-   return CryptoJS.AES.encrypt(value, secretKey).toString();
+   return CryptoJS.AES.encrypt(value.toString(), secretKey).toString();
 }
 // Decrypt
 const Decrypt = (encryptedValue) => {
