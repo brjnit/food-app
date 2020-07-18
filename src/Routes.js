@@ -63,10 +63,18 @@ const AuthenticateRegistration = ({ auth, component: Component, ...rest }) => {
 }
 
 const QueryParamRegistration = ({...rest }) => {
+    // if(!partnerId) {
+    //     const { location } = rest
+    //     const params = QueryString.parse(location.search)
+    //     setPartnerId(params.q)
+    //     //localStorage.setItem('partnerId', )
+    // }
+
     const { location } = rest
     const params = QueryString.parse(location.search)
-    console.log("...params partnerId", location.pathname)
-    if(location.pathname === "/registration") {
+    const partnerId = params.q
+    console.log("...params partnerId", params.q)
+    if(partnerId) {
         localStorage.setItem('partnerId', params.q)
     }
     return (
