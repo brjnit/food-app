@@ -51,7 +51,6 @@ const useStyles = makeStyles({
 
 const CustmerInfo = (props) => {
     const classes = useStyles();
-    
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [isCustInfoSuccess, setIsCustInfoSuccess] = useState(false)
@@ -87,6 +86,7 @@ const CustmerInfo = (props) => {
     return (
         <Wrapper>
         <div className={classes.root}>
+            
             {console.log("props.history", props)}
             {isCustInfoSuccess && <Redirect to={"/enquirySuccess"} from="/custmerInfo" />}
             <div><div className={classes.header}>Tell us about yourself</div>

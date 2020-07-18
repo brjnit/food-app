@@ -5,9 +5,11 @@ import SummaryReducer from '../reducer/SummaryReducer';
 import PartnersReducer from '../reducer/PartnersReducer';
 import RegistrationReducer from '../reducer/RegistrationReducer';
 import UserEnquiryReducer from '../reducer/UserEnquiryReducer';
+import AuthenticationReducer from '../reducer/AutheticationReducer';
 
 
 const rootReducer = combineReducers({
+    authentication: AuthenticationReducer,
     registration: RegistrationReducer,
     partners : PartnersReducer,
     landing : LandingReducer,

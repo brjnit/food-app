@@ -15,8 +15,7 @@ const UserEnquiryReducer = (state = initialState, action) => {
         case SUMBIT_ENQUIRY: {
             return {
                 ...state,
-                selectedEnquiry : {...action.newRequest},
-                newEnquiryId : action.newRequest.id
+                enquiries : {...action.newRequest}
             }
         }
     }    

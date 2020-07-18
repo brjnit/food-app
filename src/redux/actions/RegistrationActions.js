@@ -1,6 +1,7 @@
-import { REGISTER_USER, VERIFY_NUMBER, UPDATE_USER_DETAILS } from '../actions/actionTypes'
+import { REGISTER_USER, VERIFY_NUMBER, UPDATE_USER_DETAILS, AUTH } from '../actions/actionTypes'
 import APIRequest from "../../network/APIRequest/APIRequest";
 import cookie from '../../Auth/MyCookies';
+import { getEnquiriesForCustomer } from './UserEnquiryActions';
 
 export const registerUser = (name, phoneNumber, address) => {
     return (dispatch) => {
@@ -14,7 +15,10 @@ export const registerUser = (name, phoneNumber, address) => {
             console.log("[RegistrationAction.js] response", response.data)
             if (response.status == 200) {
                 cookie.setCookie("key", response.data.id)
+                //const partnerId = localStorage.getItem('partnerId')
                 dispatch(registerUserResult(name, phoneNumber, response.data.id))
+                // dispatch enquiry service
+                dispatch(getEnquiriesForCustomer(response.data.id))
             }
         });
     }
@@ -29,30 +33,30 @@ export const registerUserResult = (name, phoneNumber, customerId) => {
     }
 }
 
-export const getCustomerDetails = (customerId) =>{
-    return (dispatch)=>{
+export const getCustomerDetails = (customerId) => {
+    return (dispatch) => {
         let apiRequest = new APIRequest()
-        let inputParam = {"customerId" : customerId};
-        apiRequest.callAPI("getCustomerDetails", inputParam).then((response) =>{
+        let inputParam = { "customerId": customerId };
+        apiRequest.callAPI("getCustomerDetails", inputParam).then((response) => {
             console.log("[RegistrationAction.js] response", response)
-            if(response.status == 200){
-                console.log("[RegistrationAction.js] getCustomerDetails response :: "+ JSON.stringify(response));
+            if (response.status == 200) {
+                console.log("[RegistrationAction.js] getCustomerDetails response :: " + JSON.stringify(response));
                 response = response.data;
                 dispatch(updateCustomerDetails(response.name, response.campus, response.phoneNumber, customerId));
                 //establishConnection(customerId);
-               // goToLandingScreen();
+                // goToLandingScreen();
             }
-        }); 
+        });
     }
 }
 
-export const updateCustomerDetails = (name, campus, mobNum, customerId) =>{
+export const updateCustomerDetails = (name, campus, mobNum, customerId) => {
     return {
         type: UPDATE_USER_DETAILS,
-        name : name,
-        campus : campus,
-        customerId : customerId,
-        mobNum : mobNum
+        name: name,
+        campus: campus,
+        customerId: customerId,
+        mobNum: mobNum
     }
 }
 
@@ -84,17 +88,12 @@ export const verifyOTP = (mobNum, OTP) => {
             console.log("[RegistrationAction.js] response verifyOTP", response)
             if (response.status == 200) {
                 response = response.data
-                
                 if (response.isVerified) {
-                    console.log("usrDtls", response.isVerified)
-                    dispatch(verifyOTPResult(mobNum, response.isVerified));
-                } else {
-                    const customerId = response.id
-                    //dispatch(getCustomerDetails(customerId));
-                    // const customerId = response.id;
-                    // storeData(USER_KEY, customerId.toString()).then((data) =>{
-
-                    // })
+                    if (response.isNewUser) {
+                        dispatch(verifyOTPResult(mobNum, response.isVerified));
+                    } else {
+                        dispatch(getCustomerDetails(response.id));
+                    }
                 }
             }
         });
@@ -108,3 +107,15 @@ export const verifyOTPResult = (mobNum, isVerified) => {
         isVerified: isVerified
     }
 }
+
+export const updateAuth = (isAuthenticated, customerId) => {
+    return (dispatch) => {
+        dispatch(getEnquiriesForCustomer(customerId))
+        return {
+            type: AUTH,
+            isAuthenticated : isAuthenticated,
+            customerId : customerId,
+        }
+    }  
+}
+
