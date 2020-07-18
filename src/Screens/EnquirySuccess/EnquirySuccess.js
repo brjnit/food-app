@@ -40,7 +40,7 @@ const EnquirySuccess = (props) => {
                 {enquiries.id && <QRCode
 
                     id={enquiries.id}
-                    value={enquiries.id}
+                    value={''+enquiries.id}
                     size={350}
                     level={"H"}
                     includeMargin={true}

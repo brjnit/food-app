@@ -1,7 +1,7 @@
 import {PARTNERS_LIST} from '../actions/actionTypes'
 
 const initialState = {
-    partnersList :[]
+    partnersList : []
 }
 const PartnersReducer = (state = initialState, action) => {
     switch (action.type){

@@ -23,7 +23,6 @@ const RouteRegistration = ({ auth, component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
-            path
             render={() => !auth ?
                 (<Component />) :
                 (<Redirect to="/enquirySuccess" />)} />
@@ -66,8 +65,10 @@ const AuthenticateRegistration = ({ auth, component: Component, ...rest }) => {
 const QueryParamRegistration = ({...rest }) => {
     const { location } = rest
     const params = QueryString.parse(location.search)
-    console.log("...params partnerId", params)
-    localStorage.setItem('partnerId', "456")
+    console.log("...params partnerId", location.pathname)
+    if(location.pathname === "/registration") {
+        localStorage.setItem('partnerId', params.q)
+    }
     return (
         <AuthenticateRegistration {...rest } />
     )
