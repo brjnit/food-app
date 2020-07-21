@@ -11,6 +11,7 @@ import colors from '../../Color'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, withRouter } from 'react-router-dom';
 import Wrapper from '../../hoc/Wrapper';
+import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
@@ -81,7 +82,10 @@ const CustmerInfo = (props) => {
     // }, []);
 
 
-    
+    const isLaoding = useSelector(state => state.loading.showLoader);
+    if (isLaoding) {
+        return (<FullPageLoader/>)
+    }
 
     return (
         <Wrapper>

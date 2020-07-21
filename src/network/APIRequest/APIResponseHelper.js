@@ -1,4 +1,4 @@
-//import { showNotification, hideLoadingIndicator } from "../../redux/actions/NotificationActions";
+import { showLoadingIndicator, hideLoadingIndicator } from "../../redux/actions/LoadingActions";
 import store from '../../redux/store/ConfigureStore';
 
 
@@ -23,13 +23,13 @@ export default class APIResponseHelper {
             }catch (error){
                 console.log("[APIResponseHelper.js] exception trying to parse the response :: ", error)
             } finally{
-               // if(showLoadingIndicator)
-                    //ssstore.dispatch(hideLoadingIndicator());
+                if(showLoadingIndicator)
+                    store.dispatch(hideLoadingIndicator());
             }
         }else{
             //store.dispatch(showNotification('Error', 'Uh Oh, Something went wrong.', ' Please try again'))
-            //if(showLoadingIndicator)
-                //store.dispatch(hideLoadingIndicator());
+            if(showLoadingIndicator)
+                store.dispatch(hideLoadingIndicator());
         }
         console.log("[APIResponseHelper.js] returning from APIResponseHelper")
         return {status : status, dataAvailable : dataAvailable, data : jsonData}

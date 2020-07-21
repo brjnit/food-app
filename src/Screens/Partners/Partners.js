@@ -11,6 +11,7 @@ import { getPartnerLists } from '../../redux/actions/StoreActions';
 import Header from '../../components/Header/Header';
 import PartnerListItem from '../../components/PartnerListItem';
 import { Redirect } from 'react-router-dom';
+import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,11 @@ const Partenrs = (props) => {
         setNavigate(true)
         props.history.push("/partners/")
     };
+
+    const isLaoding = useSelector(state => state.loading.showLoader);
+    if (isLaoding) {
+        return (<FullPageLoader/>)
+    }
 
     return (
         <div>

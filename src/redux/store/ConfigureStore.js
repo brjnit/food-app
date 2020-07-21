@@ -6,9 +6,11 @@ import PartnersReducer from '../reducer/PartnersReducer';
 import RegistrationReducer from '../reducer/RegistrationReducer';
 import UserEnquiryReducer from '../reducer/UserEnquiryReducer';
 import AuthenticationReducer from '../reducer/AutheticationReducer';
+import LoadingReducer from '../reducer/LoadingReducer';
 
 
 const rootReducer = combineReducers({
+    loading: LoadingReducer,
     authentication: AuthenticationReducer,
     registration: RegistrationReducer,
     partners : PartnersReducer,

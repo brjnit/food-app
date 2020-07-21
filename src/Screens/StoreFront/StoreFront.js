@@ -16,6 +16,7 @@ import { ButtonBlue } from '../../components/UI/Button';
 
 import Modal from '@material-ui/core/Modal';
 import ReviewModal from '../../components/ReviewModal';
+import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 
 
 const useStyles = makeStyles({
@@ -124,6 +125,10 @@ const StoreFront = (props) => {
         // })
     }
    
+    const isLaoding = useSelector(state => state.loading.showLoader);
+    if (isLaoding) {
+        return (<FullPageLoader/>)
+    }
 
     return (
         <div>

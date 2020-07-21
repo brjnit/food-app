@@ -2,7 +2,7 @@ import {getAPITemplate} from './APIDefinition'
 import {GET, POST} from './MethodType'
 import {API_URL} from '../../config'
 import APIResponseHelper from './APIResponseHelper'
-//import {showLoadingIndicator, hideLoadingIndicator, showNotification} from '../../redux/actions/NotificationActions'
+import {showLoadingIndicator, hideLoadingIndicator} from '../../redux/actions/LoadingActions'
 import store from '../../redux/store/ConfigureStore'
  
 export default class APIRequest {
@@ -28,14 +28,14 @@ export default class APIRequest {
             let response = null;
             try{
                 if(showLoading)
-                    //store.dispatch(showLoadingIndicator());
+                    store.dispatch(showLoadingIndicator());
                 console.log("[APIRequest.js] input parameters for API Request :: ", postBody)
                 response = await fetch(url, postBody);
                 const responseHelper = new APIResponseHelper();
                 return await responseHelper.parseResponse(response, showLoading);
             }catch (error){
                 if(showLoading)
-                    //store.dispatch(hideLoadingIndicator());
+                    store.dispatch(hideLoadingIndicator());
                 console.log("[APIRequest.js] error while making API request :: ", error);
                 //store.dispatch(showNotification('Error', 'Uh Oh, Something went wrong.', ' Please try again'))
                 return {status : 500, dataAvailable : false, data : null}

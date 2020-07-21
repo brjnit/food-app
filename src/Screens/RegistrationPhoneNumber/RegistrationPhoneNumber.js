@@ -13,6 +13,7 @@ import OTPINPUT from '../../components/OTPINPUT/OTPINPUT';
 import { verifyNumber, verifyOTP } from '../../redux/actions/RegistrationActions';
 import { Redirect, useHistory } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import FullPageLoader from '../../components/FullPageLoader/FullPageLoader';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,6 +83,8 @@ const RegistrationPhoneNumber = (props) => {
     const [otp, setOTP] = useState('')
     const [otpVerifySuccess, setotpVerifySuccess] = useState(false)
     const usrDtls = useSelector(state => state.registration.usrDtls); //isVerified
+    
+
     const history = useHistory()
     const dispatch = useDispatch();
 
@@ -121,6 +124,10 @@ const RegistrationPhoneNumber = (props) => {
         setOTP(value)
     }
 
+    const isLaoding = useSelector(state => state.loading.showLoader);
+    if (isLaoding) {
+        return (<FullPageLoader/>)
+    }
 
     return (
 
