@@ -1,5 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import LandingReducer from '../reducer/LandingReducer';
 import SummaryReducer from '../reducer/SummaryReducer';
 import PartnersReducer from '../reducer/PartnersReducer';
@@ -18,15 +19,15 @@ const rootReducer = combineReducers({
     summary: SummaryReducer,
     enquiry:UserEnquiryReducer
 });
-
+const middleware = applyMiddleware(thunk, logger);
 let composeEnhancers = compose;
 
-/* if(__DEV__){
-    composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-} */
+// if(__DEV__){
+//     composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// } 
 
 const configureStore = () => {
-    return createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+    return createStore(rootReducer, composeEnhancers(middleware));
 };
 
 const store = configureStore()

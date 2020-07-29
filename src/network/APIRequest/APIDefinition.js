@@ -47,6 +47,12 @@ const apiList = {
         method : GET,
         params : ["customerId"]
     },
+
+    getPartnerDetailsByInvite : {
+        path : "/partner/inviteCode/$inviteCode",
+        method : GET,
+        params : ["inviteCode"]
+    },
 }
 
 export const getAPITemplate = (apiName) =>{

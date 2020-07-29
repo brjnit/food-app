@@ -1,5 +1,5 @@
 import APIRequest from '../../network/APIRequest/APIRequest';
-import { PARTNERS_LIST, PARTNER_OFFERINGS, PARTNER_DETAILS, ORDER } from './actionTypes';
+import { PARTNERS_LIST, PARTNER_OFFERINGS, PARTNER_DETAILS, ORDER, GET_GROUP_PARTER_DATA,SELECT_GROUP_AS_STORE,SELECT_STORE } from './actionTypes';
 import { formatDateTime } from '../../util';
 
 export const getPartnerLists = (partnerId) => {
@@ -160,3 +160,62 @@ export const getOrders = (data) => {
         orders: data
     }
 }
+
+export const getPartnerDetailsByInvite = (inviteCode) =>{
+    return (dispatch, getState)=>{
+        let apiRequest = new APIRequest()
+        let inputParam = {};
+        inputParam["inviteCode"] = inviteCode;
+        apiRequest.callAPI("getPartnerDetailsByInvite", inputParam).then((response) =>{
+            console.log("[StoreAction.js] response", response)
+            if(response.status == 200){
+                console.log("[StoreAction.js] getPartnerDetailsByInvite response :: "+ JSON.stringify(response))
+                if(response.dataAvailable){
+                    if(response.data.isGroup){
+                        dispatch(selectStore(response.data))
+                        dispatch(getPartnerLists(response.data.id))
+                        //pushScreen('mainApp', 'dailyget.explore');
+                    } else {
+                        dispatch(selectStore(response.data));
+                        //startBottomTabs();
+                    }    
+                }
+            }
+        });
+    }  
+}
+
+export const selectStore = (selectedStoreOrGroup) =>{
+    return {
+        type: SELECT_STORE,
+        selectedStoreOrGroup : selectedStoreOrGroup
+    }
+  }
+  
+//   export const selectGroupAsStore = (selectedGroup) =>{
+      
+//       return {
+//           type: SELECT_GROUP_AS_STORE,
+//           selectedGroup : selectedGroup
+//       }
+// }
+
+// export const getPartnerInGroup = (partnerId) => {
+//     return (dispatch)=>{
+//         let apiRequest = new APIRequest();
+//         apiRequest.callAPI("getPartnerInGroup", {"partnerId": partnerId}).then((response) =>{
+//             console.log("[UserAction.js] response getPartnerInGroup", response)
+//             if(response.status == 200){
+//                 response = response.data;
+//                 dispatch(getPartnerInGroupResult(response));
+//             }
+//         });   
+//     }  
+// }
+
+// const getPartnerInGroupResult = (groupPartnerData) => {
+//     return {
+//         type: GET_GROUP_PARTER_DATA,
+//         groupPartnerData : groupPartnerData
+//     }
+// }

@@ -1,7 +1,13 @@
-import {PARTNERS_LIST} from '../actions/actionTypes'
+import {PARTNERS_LIST, GET_GROUP_PARTER_DATA,PARTNER_OFFERINGS,SELECT_STORE } from '../actions/actionTypes'
 
 const initialState = {
-    partnersList : []
+    partnersList : [],
+
+    selectedStoreOrGroup : {
+
+    },
+    groupPartnerData: [],
+    offerings: [],
 }
 const PartnersReducer = (state = initialState, action) => {
     switch (action.type){
@@ -10,7 +16,33 @@ const PartnersReducer = (state = initialState, action) => {
                 ...state,
                 partnersList :  action.partnersList
             }
-        }        
+        }  
+        
+        case SELECT_STORE: {
+            return {
+                ...state,
+                selectedStoreOrGroup : {
+                    ...action.selectedStoreOrGroup
+                }
+
+            }
+        }
+        case PARTNER_OFFERINGS: {
+            return {
+                ...state,
+                offerings: action.result
+            }
+        }
+
+        case GET_GROUP_PARTER_DATA: {
+            return {
+                ...state,
+                groupPartnerData : {
+                    ...action.groupPartnerData
+                }
+
+            }
+        }
     }    
     return state;
 }

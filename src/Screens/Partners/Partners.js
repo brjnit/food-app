@@ -34,17 +34,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Partenrs = (props) => {
     const partnersList = useSelector(state => state.partners.partnersList);
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const classes = useStyles()
     const [isNavigate, setNavigate] = useState(false)
     const [id, setID] = useState(0)
-    useEffect(() => {
-        dispatch(getPartnerLists("456"));
-        // return () => {
-        //     disconnect();
-        //  }
-    }, []
-    );
+    // useEffect(() => {
+
+    //     dispatch(getPartnerLists("456"));
+    //     // return () => {
+    //     //     disconnect();
+    //     //  }
+    // }, []
+    // );
 
     const handleListItemClick = (event, info) => {
         setID(info.id)

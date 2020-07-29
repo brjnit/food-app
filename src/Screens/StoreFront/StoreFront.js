@@ -67,8 +67,8 @@ const useStyles = makeStyles({
 
 const StoreFront = (props) => {
     const classes = useStyles();
-    const partnerDetails = useSelector(state => state.landing.partnerDetails);
-    const catloglaData = useSelector(state => state.landing.offerings.catloglaData);
+    const partnerDetails =  props.selectedStoreOrGroup//useSelector(state => state.landing.partnerDetails);
+    const catloglaData =  useSelector(state => state.landing.offerings.catloglaData);
     const bannerData = useSelector(state => state.landing.offerings.bannerData);
 
     const dispatch = useDispatch();
@@ -84,12 +84,15 @@ const StoreFront = (props) => {
         amount: 20,
         quantity: 4
     }]
+    // useEffect(() => {
+    //     console.log(props.match.params)
+    //     dispatch(getPartnerDetails(props.match.params.id)); //partnerID
+    // }, []);
     useEffect(() => {
-        console.log(props.match.params)
-        dispatch(getPartnerDetails(props.match.params.id)); //partnerID
-    }, []);
-    useEffect(() => {
-        dispatch(getPartnerOfferings(props.match.params.id))
+        console.log("partnerDetails  ##", partnerDetails)
+        if(partnerDetails && partnerDetails.id) {
+            dispatch(getPartnerOfferings(partnerDetails.id))
+        } 
     }, []);
 
     const onPressOrder = () => {
